@@ -30,3 +30,22 @@ test('uses safe text rendering for all source content', async ({ page }) => {
   await expect(page.locator('script:not([src])')).toHaveCount(0);
   await expect(page.locator('[onclick], [onerror], [onload]')).toHaveCount(0);
 });
+
+test('provides an accessible Deadly Assault mode switch on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  const modeSwitch = page.getByRole('link', { name: 'View Deadly Assault brief', exact: true });
+
+  await expect(modeSwitch).toBeVisible();
+  await expect(modeSwitch).toHaveAttribute('href', 'https://alvinwin.github.io/zzz-deadly-assault/');
+  expect(await modeSwitch.getAttribute('target')).toBeNull();
+
+  await page.keyboard.press('Tab');
+  await expect(modeSwitch).toBeFocused();
+  const focusStyle = await modeSwitch.evaluate((element) => getComputedStyle(element));
+  expect(focusStyle.outlineStyle).not.toBe('none');
+  expect(Number.parseFloat(focusStyle.outlineWidth)).toBeGreaterThan(0);
+
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(overflow).toBe(false);
+});

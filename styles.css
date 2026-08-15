@@ -71,6 +71,27 @@ h3 { margin-bottom: .1rem; line-height: 1.15; }
 .dek,
 .section-note,
 .freshness-note { color: var(--muted); }
+.mode-switch {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  margin-top: .9rem;
+  padding: .35rem .75rem;
+  border: 1px solid #794536;
+  color: #ffad91;
+  background: #2a1d1a;
+  text-decoration: none;
+}
+.mode-switch:hover,
+.mode-switch:focus-visible {
+  border-color: var(--orange);
+  color: #fff;
+  background: #4a2922;
+}
+.mode-switch:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+}
 
 .cycle-strip {
   display: flex;
