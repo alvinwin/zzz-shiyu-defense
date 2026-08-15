@@ -1,0 +1,57 @@
+name: update data
+
+on:
+  schedule:
+    - cron: '17 13 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: check cycle eligibility
+        id: eligibility
+        shell: bash
+        run: |
+          today="$(date -u +%F)"
+          status="$(node scripts/update-if-new.mjs --today "$today" --eligibility-only)"
+          echo "today=$today" >> "$GITHUB_OUTPUT"
+          echo "due=$([[ "$status" == due ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - name: install browser when due
+        if: steps.eligibility.outputs.due == 'true'
+        run: npx playwright install --with-deps chromium
+      - name: clone source checkout when due
+        if: steps.eligibility.outputs.due == 'true'
+        run: git clone --depth 1 https://github.com/spiritfxxxx/buhflipexplode.git "$RUNNER_TEMP/buhflipexplode"
+      - name: update current data when due
+        if: steps.eligibility.outputs.due == 'true'
+        run: node scripts/update-if-new.mjs --today "${{ steps.eligibility.outputs.today }}" --source-root "$RUNNER_TEMP/buhflipexplode"
+      - name: run full check when due
+        if: steps.eligibility.outputs.due == 'true'
+        run: npm run check
+      - name: commit and push changed data
+        if: steps.eligibility.outputs.due == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- data/current.json; then
+            echo 'current data unchanged; nothing to commit'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/current.json
+          git commit -m 'chore: update Shiyu Defense data'
+          git push

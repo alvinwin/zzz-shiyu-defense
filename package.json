@@ -1,0 +1,18 @@
+{
+  "name": "zzz-shiyu-defense",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "update": "node scripts/normalize-data.mjs",
+    "validate": "node scripts/validate-data.mjs data/current.json",
+    "build": "node scripts/build.mjs",
+    "check:budget": "node scripts/check-budget.mjs dist",
+    "test": "node --test tests/*.test.mjs",
+    "test:e2e": "playwright test",
+    "check": "npm run test && npm run build && npm run check:budget && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2"
+  }
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d1114">
+    <meta name="description" content="A compact current-cycle brief for Zenless Zone Zero Shiyu Defense.">
+    <title>Shiyu Defense — Inter-Knot Brief</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="network-label">Inter-Knot Brief</p>
+      <h1>Shiyu Defense</h1>
+      <p class="dek">current threats, room affinities, and combat effects</p>
+    </header>
+
+    <main>
+      <section class="cycle-strip" aria-labelledby="cycle-status-title">
+        <div>
+          <p class="eyebrow" id="cycle-status-title">current dispatch</p>
+          <p id="cycle-status">loading cycle data…</p>
+        </div>
+        <p class="freshness-note">The site checks for a new cycle after this one ends.</p>
+      </section>
+
+      <section aria-labelledby="frontiers-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">encounters</p>
+            <h2 id="frontiers-title">Current frontiers</h2>
+          </div>
+          <p class="section-note">Open a frontier to see each room and wave.</p>
+        </div>
+        <div id="frontiers" class="frontier-list" aria-live="polite"></div>
+      </section>
+
+      <section class="buff-section" aria-labelledby="buffs-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">combat effects</p>
+            <h2 id="buffs-title">Current buffs</h2>
+          </div>
+        </div>
+        <div id="buffs" class="buff-list"></div>
+      </section>
+
+      <section class="source-note" aria-labelledby="source-title">
+        <p class="eyebrow" id="source-title">data note</p>
+        <p id="source-copy">Enemy HP is calculated from community-maintained data and is not an official published value.</p>
+        <a id="source-link" href="#">View source data</a>
+      </section>
+    </main>
+
+    <a class="feedback" href="https://github.com/alvinwin/zzz-shiyu-defense/issues/new?template=feedback.yml" target="_blank" rel="noreferrer">Send feedback</a>
+    <p class="fatal-error" id="fatal-error" hidden>Cycle data could not load. Try again later.</p>
+  </body>
+</html>

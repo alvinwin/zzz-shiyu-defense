@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 0,
+  "game": "zzz",
+  "mode": "Stable Node",
+  "version": {
+    "ordinal": 55,
+    "id": "3.2.0",
+    "name": "future <script>",
+    "startDate": "2026-08-22",
+    "endDate": "2026-09-05",
+    "live": false
+  },
+  "buffs": [],
+  "nodes": [],
+  "provenance": {
+    "repository": "https://example.invalid",
+    "sha": "old-schema",
+    "paths": [],
+    "fetchedDate": "not-a-date",
+    "license": "MIT"
+  }
+}
