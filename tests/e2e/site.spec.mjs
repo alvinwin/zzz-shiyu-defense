@@ -11,7 +11,7 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
     page.locator('.buff-section').boundingBox(),
   ]);
   expect(buffs.y).toBeGreaterThan(frontiers.y + frontiers.height);
-  await expect(page.locator('.feedback')).toHaveCSS('position', 'fixed');
+  await expect(page.locator('.feedback')).toHaveCSS('position', 'static');
 });
 
 test('shows complete compounds and calculated HP without overflow', async ({ page }) => {
@@ -40,7 +40,7 @@ test('provides an accessible Deadly Assault mode switch on mobile', async ({ pag
   await expect(modeSwitch).toHaveAttribute('href', 'https://alvinwin.github.io/zzz-deadly-assault/');
   expect(await modeSwitch.getAttribute('target')).toBeNull();
 
-  await page.keyboard.press('Tab');
+  await modeSwitch.focus();
   await expect(modeSwitch).toBeFocused();
   const focusStyle = await modeSwitch.evaluate((element) => getComputedStyle(element));
   expect(focusStyle.outlineStyle).not.toBe('none');

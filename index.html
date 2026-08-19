@@ -3,21 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0d1114">
+    <meta name="theme-color" content="#fffaf0">
     <meta name="description" content="A compact current-cycle brief for Zenless Zone Zero Shiyu Defense.">
     <title>Shiyu Defense — Inter-Knot Brief</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="app.js"></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to the brief</a>
     <header class="site-header">
-      <p class="network-label">Inter-Knot Brief</p>
-      <h1>Shiyu Defense</h1>
-      <p class="dek">current threats, room affinities, and combat effects</p>
-      <a class="mode-switch" href="https://alvinwin.github.io/zzz-deadly-assault/">View Deadly Assault brief</a>
+      <div class="shell masthead">
+        <a class="brand" href="#top" aria-label="sixthstreet.wiki home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>sixthstreet.wiki</span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a href="#frontiers-title">Explore</a>
+          <a href="#cycle-status-title">Current cycle</a>
+          <a href="#source-title">Sources</a>
+        </nav>
+      </div>
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-art" aria-hidden="true"></div>
+        <div class="shell hero-content">
+          <p class="eyebrow">Inter-Knot combat record</p>
+          <h1 id="hero-title">Shiyu Defense</h1>
+          <p class="hero-copy">Current threats, room affinities, and combat effects—filed with a source and date for the run ahead.</p>
+          <a class="mode-switch" href="https://alvinwin.github.io/zzz-deadly-assault/">View Deadly Assault brief</a>
+          <p class="hero-note">A focused field brief for the active Shiyu cycle.</p>
+        </div>
+      </section>
     </header>
 
-    <main>
+    <main id="main-content">
       <section class="cycle-strip" aria-labelledby="cycle-status-title">
         <div>
           <p class="eyebrow" id="cycle-status-title">current dispatch</p>
@@ -54,7 +72,15 @@
       </section>
     </main>
 
-    <a class="feedback" href="https://github.com/alvinwin/zzz-shiyu-defense/issues/new?template=feedback.yml" target="_blank" rel="noreferrer">Send feedback</a>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p class="footer-line">Take the useful note with you.</p>
+        <div class="footer-links">
+          <a class="feedback" href="https://github.com/alvinwin/zzz-shiyu-defense/issues/new?template=feedback.yml" target="_blank" rel="noreferrer">Send feedback</a>
+          <p class="disclaimer">Fan-made reference site. Not affiliated with HoYoverse, Zenless Zone Zero, or their partners.</p>
+        </div>
+      </div>
+    </footer>
     <p class="fatal-error" id="fatal-error" hidden>Cycle data could not load. Try again later.</p>
   </body>
 </html>
