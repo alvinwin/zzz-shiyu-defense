@@ -11,16 +11,35 @@ const formatDate = (iso) => {
   return `${month}/${day}`;
 };
 
+const formatCheckedDate = (iso) => {
+  const [, month, day] = iso.split('-').map(Number);
+  const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month - 1];
+  return `${monthName} ${day}`;
+};
+
 const formatHP = (value) => new Intl.NumberFormat('en-US', {
   notation: value >= 1_000_000 ? 'compact' : 'standard',
   maximumFractionDigits: value >= 1_000_000 ? 2 : 0,
 }).format(value);
 
 const titleCase = (value) => value[0].toUpperCase() + value.slice(1);
+const elementNames = { ice: 'Ice', fire: 'Fire', electric: 'Electric', ether: 'Ether', physical: 'Physical', wind: 'Wind' };
+const elementIcons = Object.fromEntries(Object.keys(elementNames).map((name) => [name, `https://cdn.prydwen.gg/images/zenless-zone-zero/icons/ele_${name}.webp`]));
 
 function affinityTag(element, state) {
   const label = state === 'weak' ? 'weak' : 'resists';
-  return node('span', `tag ${state} ${element}`, `${titleCase(element)} ${label}`);
+  const tag = node('span', `tag ${state} ${element}`);
+  if (elementIcons[element]) {
+    const icon = node('img', 'element-icon');
+    icon.src = elementIcons[element];
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.width = 17;
+    icon.height = 17;
+    tag.append(icon);
+  }
+  tag.append(node('span', '', `${elementNames[element] || titleCase(element)} ${label}`));
+  return tag;
 }
 
 function renderEnemy(enemy) {
@@ -127,7 +146,10 @@ async function start() {
   if (!response.ok) throw new Error(`data request failed: ${response.status}`);
   const data = await response.json();
 
-  byId('cycle-status').textContent = `cycle data for ${formatDate(data.version.startDate)} - ${formatDate(data.version.endDate)} // verified ${formatDate(data.provenance.fetchedDate)}`;
+  byId('cycle-status').replaceChildren(
+    node('span', 'cycle-dates', `${formatDate(data.version.startDate)}–${formatDate(data.version.endDate)}`),
+    node('span', 'verified', `Verified ${formatCheckedDate(data.provenance.fetchedDate)}`),
+  );
   const frontierList = byId('frontiers');
   data.nodes.forEach((frontier) => frontierList.append(renderFrontier(frontier)));
   const buffList = byId('buffs');
