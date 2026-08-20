@@ -88,11 +88,24 @@ const keyTerms = [
   'Attack specialty', 'Anomaly specialty', 'Ultimate', 'Decibels',
 ];
 const keyTermPattern = new RegExp(`(${keyTerms.join('|')})`, 'g');
+const termRoutes = new Map([
+  ['Attribute Anomaly DMG', 'https://sixthstreet.wiki/terms/attribute-anomaly/'],
+]);
+
+function semanticTerm(text) {
+  const route = termRoutes.get(text);
+  if (!route) return node('strong', termClass(text), text);
+
+  const link = node('a', `${termClass(text)} term-link`, text);
+  link.href = route;
+  link.setAttribute('aria-label', `${text}: read the Attribute Anomaly field note`);
+  return link;
+}
 
 function appendSemanticText(parent, text) {
   for (const part of text.split(keyTermPattern)) {
     if (!part) continue;
-    if (keyTerms.includes(part)) parent.append(node('strong', termClass(part), part));
+    if (keyTerms.includes(part)) parent.append(semanticTerm(part));
     else parent.append(document.createTextNode(part));
   }
 }
@@ -103,7 +116,7 @@ function renderBuff(buff) {
   const copy = node('p');
   for (const segment of buff.emphasis) {
     if (segment.emphasis === 'plain') appendSemanticText(copy, segment.text);
-    else copy.append(node('strong', termClass(segment.text), segment.text));
+    else copy.append(semanticTerm(segment.text));
   }
   article.append(copy);
   return article;

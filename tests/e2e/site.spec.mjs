@@ -49,3 +49,11 @@ test('provides an accessible Deadly Assault mode switch on mobile', async ({ pag
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
 });
+
+test('connects supported combat terms to their field notes', async ({ page }) => {
+  await page.goto('/');
+  const anomaly = page.getByRole('link', { name: 'Attribute Anomaly DMG: read the Attribute Anomaly field note' });
+
+  await expect(anomaly).toHaveCount(1);
+  await expect(anomaly).toHaveAttribute('href', 'https://sixthstreet.wiki/terms/attribute-anomaly/');
+});

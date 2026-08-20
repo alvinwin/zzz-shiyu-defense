@@ -28,3 +28,7 @@ The asset check warns when the static shell exceeds 16 KiB raw or the complete t
 ## Product boundary
 
 `Inter-Knot Brief` is the planned parent entrypoint. Shiyu Defense and Deadly Assault are separate surfaces. This repository owns Shiyu Defense only and does not share its encounter schema or update logic with Deadly Assault.
+
+Shared user-facing copy follows the Sixthstreet voice contract in the planning
+workspace. The contract aligns the family of pages without merging their data
+or update logic.
