@@ -4,6 +4,7 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#cycle-status .cycle-dates')).toHaveText('08/07–08/21');
   await expect(page.locator('#cycle-status .verified')).toHaveText('Verified Aug 14');
+  await expect(page.locator('#cycle-status .remaining')).toHaveText(/remaining|Refresh pending/);
   await expect(page.locator('.frontier')).toHaveCount(5);
   await expect(page.locator('.buff')).toHaveCount(3);
   await expect(page.locator('#cycle-status-title')).toHaveText('Current cycle');

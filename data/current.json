@@ -8,6 +8,7 @@
     "name": "3.1 Phase 1",
     "startDate": "2026-08-07",
     "endDate": "2026-08-21",
+    "endsAt": "2026-08-21T00:00:00.000Z",
     "live": true
   },
   "buffs": [

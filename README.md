@@ -16,6 +16,11 @@ npm run update -- --source-root /path/to/buhflipexplode
 
 The deployed workflow should check for a new record after the displayed cycle ends. Repeated checks during an active cycle are unnecessary.
 
+The normalized record keeps `startDate` and `endDate` for display and derives
+`version.endsAt` as the exclusive UTC cutover (`endDate` at `00:00:00.000Z`).
+Builds derive the small `data/cycle-status.json` projection from that record;
+it is published with the rest of `dist` and is not hand-maintained.
+
 ## Local checks
 
 ```bash

@@ -1,3 +1,5 @@
+import { formatRemaining } from './scripts/lib/remaining-time.mjs';
+
 const byId = (id) => document.getElementById(id);
 const node = (tag, className, text) => {
   const element = document.createElement(tag);
@@ -149,7 +151,12 @@ async function start() {
   byId('cycle-status').replaceChildren(
     node('span', 'cycle-dates', `${formatDate(data.version.startDate)}–${formatDate(data.version.endDate)}`),
     node('span', 'verified', `Verified ${formatCheckedDate(data.provenance.fetchedDate)}`),
+    node('span', 'remaining', formatRemaining(data?.version?.endsAt, Date.now())),
   );
+  byId('cycle-status').querySelector('.remaining').setAttribute('aria-live', 'off');
+  window.setInterval(() => {
+    byId('cycle-status').querySelector('.remaining').textContent = formatRemaining(data?.version?.endsAt, Date.now());
+  }, 60_000);
   const frontierList = byId('frontiers');
   data.nodes.forEach((frontier) => frontierList.append(renderFrontier(frontier)));
   const buffList = byId('buffs');

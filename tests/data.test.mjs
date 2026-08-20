@@ -4,7 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { readLiveOrdinal, sanitizeHtml, selectLiveVersion, NODE_HP_MULTIPLIERS } from '../scripts/normalize-data.mjs';
-import { validate, validateFile } from '../scripts/validate-data.mjs';
+import { cycleStatusFromData, validate, validateCycleStatus, validateFile } from '../scripts/validate-data.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const current = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/current.json'), 'utf8'));
@@ -14,6 +14,24 @@ test('current record validates with exact shape and provenance', () => {
   assert.deepEqual(current.nodes.map((node) => node.sides.length), [2, 2, 2, 2, 3]);
   assert.equal(current.buffs.length, 3);
   assert.equal(validateFile(path.join(ROOT, 'data/current.json')).length, 0);
+});
+
+test('cycle status is derived from current data and validates its UTC cutovers', () => {
+  const status = cycleStatusFromData(current);
+  assert.deepEqual(status, {
+    schemaVersion: 1,
+    mode: 'shiyu-defense',
+    status: 'current',
+    startsAt: '2026-08-07T00:00:00.000Z',
+    endsAt: '2026-08-21T00:00:00.000Z',
+    checkedAt: '2026-08-14T00:00:00.000Z',
+  });
+  assert.deepEqual(validateCycleStatus(status, current), []);
+  assert.notDeepEqual(validateCycleStatus({ ...status, endsAt: '2026-08-22T00:00:00.000Z' }, current), []);
+  const invalidCalendar = structuredClone(current);
+  invalidCalendar.version.endsAt = '2026-02-31T00:00:00.000Z';
+  invalidCalendar.version.endDate = '2026-02-31';
+  assert.ok(validateCycleStatus(cycleStatusFromData(invalidCalendar), invalidCalendar).some((error) => /ISO timestamp/.test(error)));
 });
 
 test('five known HP samples use the pinned formula', () => {
@@ -62,7 +80,7 @@ test('selection reads vLive and rejects other modes/schemas/future entries', () 
 
 test('validator accepts a synthetic next live ordinal with ordered ISO dates', () => {
   const next = structuredClone(current);
-  next.version = { ...next.version, ordinal: 55, id: '3.1.2', name: '3.1 Phase 2', startDate: '2026-08-22', endDate: '2026-09-05' };
+  next.version = { ...next.version, ordinal: 55, id: '3.1.2', name: '3.1 Phase 2', startDate: '2026-08-22', endDate: '2026-09-05', endsAt: '2026-09-05T00:00:00.000Z' };
   next.provenance = { ...next.provenance, liveOrdinal: 55, liveId: '3.1.2' };
   assert.deepEqual(validate(next), []);
 });

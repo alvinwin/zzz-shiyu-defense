@@ -219,7 +219,15 @@ export function normalize({ sourceRoot = DEFAULT_SOURCE_ROOT, output = path.join
     schemaVersion: 1,
     game: 'zzz',
     mode: 'Critical Node',
-    version: { ordinal: selected.ordinal, id: selected.id, name: selected.version.versionName, startDate: dates.start, endDate: dates.end, live: true },
+    version: {
+      ordinal: selected.ordinal,
+      id: selected.id,
+      name: selected.version.versionName,
+      startDate: dates.start,
+      endDate: dates.end,
+      endsAt: `${dates.end}T00:00:00.000Z`,
+      live: true,
+    },
     buffs,
     nodes,
     calculatedHP: {

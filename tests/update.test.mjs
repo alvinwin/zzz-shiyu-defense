@@ -9,7 +9,7 @@ const current = JSON.parse(fs.readFileSync(new URL('../data/current.json', impor
 
 function nextCandidate(overrides = {}) {
   const candidate = structuredClone(current);
-  candidate.version = { ...candidate.version, ordinal: 55, id: '3.1.2', name: '3.1 Phase 2', startDate: '2026-08-22', endDate: '2026-09-05' };
+  candidate.version = { ...candidate.version, ordinal: 55, id: '3.1.2', name: '3.1 Phase 2', startDate: '2026-08-22', endDate: '2026-09-05', endsAt: '2026-09-05T00:00:00.000Z' };
   candidate.provenance = { ...candidate.provenance, liveOrdinal: 55, liveId: '3.1.2', fetchedDate: '2026-08-22' };
   return { ...candidate, ...overrides };
 }
@@ -52,6 +52,6 @@ test('invalid and non-advancing candidates are rejected', () => {
   const invalid = nextCandidate({ nodes: [] });
   assert.equal(isCandidateAccepted(current, invalid, '2026-08-22'), false);
   assert.match(evaluateCandidate(current, invalid, '2026-08-22').reason, /validation failed/);
-  const nonAdvancing = nextCandidate({ version: { ...nextCandidate().version, startDate: current.version.startDate, endDate: current.version.endDate } });
+  const nonAdvancing = nextCandidate({ version: { ...nextCandidate().version, startDate: current.version.startDate, endDate: current.version.endDate, endsAt: current.version.endsAt } });
   assert.deepEqual(evaluateCandidate(current, nonAdvancing, '2026-08-20'), { accepted: false, reason: 'candidate dates do not advance' });
 });

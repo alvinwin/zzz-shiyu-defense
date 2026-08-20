@@ -17,6 +17,7 @@ main{padding-block:58px 0}.cycle-strip{display:flex;justify-content:space-betwee
 .ticker-heading strong{font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
 .status{display:flex;flex:1;justify-content:flex-end;align-items:center;gap:14px;min-height:44px;margin:0;color:#59636a;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums}
 .status .verified{color:var(--teal-deep);font-weight:800}
+.status .remaining{color:#59636a;font-weight:700}
 .status-note{margin:0 0 25px;color:#59636a;font-size:13px}
 .site-footer .footer-actions>a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;color:#35404a;font-size:13px;font-weight:760}
 .site-footer .footer-actions>a:hover{color:var(--ink);background:#f3eadb}

@@ -4,7 +4,7 @@ import { extname, join, normalize } from 'node:path';
 
 const root = normalize(process.argv[2] || 'dist');
 const port = Number(process.env.PORT || 4173);
-const types = { '.css': 'text/css', '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json' };
+const types = { '.css': 'text/css', '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json' };
 
 createServer((request, response) => {
   const pathname = new URL(request.url, `http://${request.headers.host}`).pathname;

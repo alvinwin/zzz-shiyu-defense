@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ELEMENT_ORDER, NODE_HP_MULTIPLIERS, SOURCE_PATHS, SOURCE_REPOSITORY } from './normalize-data.mjs';
+import { strictIsoTimestamp } from './lib/remaining-time.mjs';
 
 const THIS_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(THIS_DIR, '..');
@@ -14,6 +15,31 @@ function isDate(value) {
 function number(value) { return typeof value === 'number' && Number.isFinite(value); }
 function fail(errors, message) { errors.push(message); }
 
+export function cycleStatusFromData(data) {
+  const version = data?.version ?? {};
+  const fetchedDate = data?.provenance?.fetchedDate;
+  return {
+    schemaVersion: 1,
+    mode: 'shiyu-defense',
+    status: 'current',
+    startsAt: `${version.startDate}T00:00:00.000Z`,
+    endsAt: version.endsAt,
+    checkedAt: `${fetchedDate}T00:00:00.000Z`,
+  };
+}
+
+export function validateCycleStatus(status, data) {
+  const errors = [];
+  const expected = cycleStatusFromData(data);
+  if (!status || typeof status !== 'object' || Array.isArray(status)) return ['cycle status must be an object'];
+  if (status.schemaVersion !== 1 || status.mode !== 'shiyu-defense' || status.status !== 'current') errors.push('cycle status schema/mode/status is incorrect');
+  if (status.startsAt !== expected.startsAt || status.endsAt !== expected.endsAt || status.checkedAt !== expected.checkedAt) errors.push('cycle status timestamps must be derived from current data');
+  for (const key of ['startsAt', 'endsAt', 'checkedAt']) {
+    if (!Number.isFinite(strictIsoTimestamp(status[key]))) errors.push(`cycle status ${key} must be an ISO timestamp`);
+  }
+  return errors;
+}
+
 export function validate(data) {
   const errors = [];
   if (!data || typeof data !== 'object' || Array.isArray(data)) return ['root must be an object'];
@@ -23,6 +49,7 @@ export function validate(data) {
   const version = data.version;
   if (!version || !Number.isSafeInteger(version.ordinal) || version.ordinal < 1 || typeof version.id !== 'string' || !version.id || version.live !== true) fail(errors, 'version must have a positive live ordinal and non-empty id');
   if (!version || typeof version.name !== 'string' || !version.name || !isDate(version.startDate) || !isDate(version.endDate) || version.startDate >= version.endDate) fail(errors, 'version must have a non-empty name and ordered ISO start/end dates');
+  if (!version || version.endsAt !== `${version.endDate}T00:00:00.000Z`) fail(errors, 'version.endsAt must exactly derive from version.endDate at UTC midnight');
 
   if (!Array.isArray(data.buffs) || data.buffs.length !== 3) fail(errors, 'buffs must contain exactly three records');
   for (const [index, buff] of (data.buffs ?? []).entries()) {
