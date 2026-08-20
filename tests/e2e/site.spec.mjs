@@ -5,7 +5,12 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await expect(page.locator('#cycle-status')).toContainText('cycle data for 08/07 - 08/21 // verified 08/14');
   await expect(page.locator('.frontier')).toHaveCount(5);
   await expect(page.locator('.buff')).toHaveCount(3);
-  await expect(page.locator('main section').first()).toHaveClass(/cycle-strip/);
+  await expect(page.locator('.resource-ticker')).toContainText('Current cycle');
+  const tickerFollowsHero = await page.evaluate(() => Boolean(
+    document.querySelector('.hero').compareDocumentPosition(document.querySelector('.resource-ticker'))
+      & Node.DOCUMENT_POSITION_FOLLOWING,
+  ));
+  expect(tickerFollowsHero).toBe(true);
   const [frontiers, buffs] = await Promise.all([
     page.locator('.frontier-list').boundingBox(),
     page.locator('.buff-section').boundingBox(),
@@ -34,10 +39,10 @@ test('uses safe text rendering for all source content', async ({ page }) => {
 test('provides an accessible Deadly Assault mode switch on mobile', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/');
-  const modeSwitch = page.getByRole('link', { name: 'View Deadly Assault brief', exact: true });
+  const modeSwitch = page.getByRole('link', { name: 'View Deadly Assault', exact: true });
 
   await expect(modeSwitch).toBeVisible();
-  await expect(modeSwitch).toHaveAttribute('href', 'https://alvinwin.github.io/zzz-deadly-assault/');
+  await expect(modeSwitch).toHaveAttribute('href', 'https://da.sixthstreet.wiki/');
   expect(await modeSwitch.getAttribute('target')).toBeNull();
 
   await modeSwitch.focus();
@@ -48,6 +53,20 @@ test('provides an accessible Deadly Assault mode switch on mobile', async ({ pag
 
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
+});
+
+test('links the shared brand back to the homepage', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'sixthstreet.wiki home' })).toHaveAttribute('href', 'https://sixthstreet.wiki/');
+  await expect(page.getByRole('link', { name: 'Source and license' })).toHaveAttribute('href', 'https://github.com/alvinwin/zzz-shiyu-defense');
+});
+
+test('uses direct player-facing labels without editorial slogans', async ({ page }) => {
+  await page.goto('/');
+
+  await expect(page.getByRole('heading', { name: 'Current frontiers', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Current buffs', exact: true })).toBeVisible();
+  await expect(page.getByText('Take the useful note with you.')).toHaveCount(0);
 });
 
 test('connects supported combat terms to their field notes', async ({ page }) => {

@@ -13,12 +13,12 @@
     <a class="skip-link" href="#main-content">Skip to the brief</a>
     <header class="site-header">
       <div class="shell masthead">
-        <a class="brand" href="#top" aria-label="sixthstreet.wiki home">
+        <a class="brand" href="https://sixthstreet.wiki/" aria-label="sixthstreet.wiki home">
           <span class="brand-mark" aria-hidden="true">S</span>
           <span>sixthstreet.wiki</span>
         </a>
         <nav class="primary-nav" aria-label="Primary navigation">
-          <a href="#frontiers-title">Brief</a>
+          <a href="#frontiers-title">Frontiers</a>
           <a href="#buffs-title">Buffs</a>
           <a href="#source-title">Sources</a>
         </nav>
@@ -26,40 +26,42 @@
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-art" aria-hidden="true"></div>
         <div class="shell hero-content">
-          <p class="eyebrow">The neighborhood desk // challenge record</p>
+          <p class="eyebrow">Current Shiyu Defense cycle</p>
           <h1 id="hero-title">Shiyu Defense</h1>
-          <p class="hero-copy">Frontiers, room affinities, enemy waves, and cycle buffs—filed in one compact, source-dated brief for the next run.</p>
-          <a class="mode-switch" href="https://alvinwin.github.io/zzz-deadly-assault/">View Deadly Assault brief</a>
-          <p class="hero-note">A useful note before the next run.</p>
+          <p class="hero-copy">Frontiers, room affinities, enemy waves, and buffs for the current cycle, with dates and sources.</p>
+          <a class="mode-link" href="https://da.sixthstreet.wiki/">View Deadly Assault <span aria-hidden="true">→</span></a>
         </div>
       </section>
     </header>
 
-    <main id="main-content">
-      <section class="cycle-strip" aria-labelledby="cycle-status-title">
-        <div>
-          <p class="eyebrow" id="cycle-status-title">Current rotation</p>
-          <p id="cycle-status">loading cycle data…</p>
+    <aside class="resource-ticker" aria-label="Shiyu Defense status board">
+      <div class="shell ticker-inner">
+        <div class="ticker-heading">
+          <strong id="cycle-status-title">Current cycle</strong>
+          <span class="ticker-caption">Verified data</span>
         </div>
-        <p class="freshness-note">The site checks for a new cycle after this one ends.</p>
-      </section>
+        <p id="cycle-status" class="status" aria-live="polite">loading cycle data…</p>
+      </div>
+    </aside>
 
+    <main id="main-content">
       <section aria-labelledby="frontiers-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">On the board</p>
-            <h2 id="frontiers-title">Current frontiers.</h2>
+            <p class="eyebrow">Encounters</p>
+            <h2 id="frontiers-title">Current frontiers</h2>
           </div>
           <p class="section-note">Open a frontier for rooms, waves, and affinity shifts.</p>
         </div>
+        <p class="status-note">When this cycle ends, the site checks for the next one and keeps retrying until verified data is available.</p>
         <div id="frontiers" class="frontier-list" aria-live="polite"></div>
       </section>
 
       <section class="buff-section" aria-labelledby="buffs-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Global buffs</p>
-            <h2 id="buffs-title">What the cycle rewards.</h2>
+            <p class="eyebrow">Cycle effects</p>
+            <h2 id="buffs-title">Current buffs</h2>
           </div>
         </div>
         <div id="buffs" class="buff-list"></div>
@@ -74,10 +76,10 @@
 
     <footer class="site-footer">
       <div class="shell footer-inner">
-        <p class="footer-line">Take the useful note with you.</p>
         <div class="footer-links">
-          <a class="feedback" href="https://github.com/alvinwin/zzz-shiyu-defense/issues/new?template=feedback.yml" target="_blank" rel="noreferrer">Send feedback</a>
           <p class="disclaimer">Fan-made reference site. Not affiliated with HoYoverse, Zenless Zone Zero, or their partners.</p>
+          <a href="https://github.com/alvinwin/zzz-shiyu-defense">Source and license</a>
+          <a class="feedback" href="https://github.com/alvinwin/zzz-shiyu-defense/issues/new?template=feedback.yml" target="_blank" rel="noreferrer">Send feedback</a>
         </div>
       </div>
     </footer>
