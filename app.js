@@ -78,8 +78,8 @@ function renderRoom(side, index, roomBuff) {
   room.append(head);
   if (roomBuff) {
     const buff = node('section', 'room-buff');
-    buff.setAttribute('aria-label', `Room ${index + 1} buff: ${roomBuff.name}`);
-    const label = node('p', 'room-buff-label', 'Room buff');
+    buff.setAttribute('aria-label', `Frontier Effect for Room ${index + 1}: ${roomBuff.name}`);
+    const label = node('p', 'room-buff-label', 'Frontier Effect');
     label.append(node('strong', '', roomBuff.name));
     buff.append(label, renderBuffCopy(roomBuff));
     room.append(buff);
