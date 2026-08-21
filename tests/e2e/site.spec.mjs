@@ -7,6 +7,22 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await expect(page.locator('#cycle-status .remaining')).toHaveText(/remaining|Refresh pending/);
   await expect(page.locator('.frontier')).toHaveCount(5);
   await expect(page.locator('.buff')).toHaveCount(3);
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff')).toHaveCount(3);
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label')).toHaveText([
+    'Frontier EffectTurbulent Resonance',
+    'Frontier EffectFinal Concerto',
+    'Frontier EffectRime and Thunder Breach',
+  ]);
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label strong')).toHaveText([
+    'Turbulent Resonance',
+    'Final Concerto',
+    'Rime and Thunder Breach',
+  ]);
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff').first()).toHaveAttribute(
+    'aria-label',
+    'Frontier Effect for Room 1: Turbulent Resonance',
+  );
+  await expect(page.locator('.frontier').nth(3).locator('.room-buff')).toHaveCount(0);
   await expect(page.locator('#cycle-status-title')).toHaveText('Current cycle');
   await expect(page.locator('.ticker-caption')).toHaveCount(0);
   await expect(page.locator('.hero .eyebrow')).toHaveText('Shiyu Defense');
@@ -38,12 +54,27 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await expect(page.locator('.disclaimer')).toContainText('Attribute icon artwork © HoYoverse.');
 });
 
+test('renders room buffs by explicit identity when the buff list is reordered', async ({ page }) => {
+  await page.route('**/data/current.json', async (route) => {
+    const response = await route.fetch();
+    const data = await response.json();
+    data.buffs.reverse();
+    await route.fulfill({ response, json: data });
+  });
+  await page.goto('/');
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label strong')).toHaveText([
+    'Turbulent Resonance',
+    'Final Concerto',
+    'Rime and Thunder Breach',
+  ]);
+});
+
 test('shows complete compounds and calculated HP without overflow', async ({ page }) => {
   await page.goto('/');
   await page.locator('.frontier').last().locator('summary').click();
   await expect(page.getByText('Lightfoot Rover MK II')).toBeVisible();
   await expect(page.getByText(/4.56M calculated HP/)).toBeVisible();
-  await expect(page.locator('.term', { hasText: 'CRIT DMG' })).toHaveText('CRIT DMG');
+  await expect(page.locator('.room-buff .term', { hasText: 'CRIT DMG' })).toHaveText('CRIT DMG');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
 });

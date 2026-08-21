@@ -56,7 +56,7 @@ function renderEnemy(enemy) {
   return item;
 }
 
-function renderRoom(side, index) {
+function renderRoom(side, index, roomBuff) {
   const room = node('article', 'room');
   const head = node('div', 'room-head');
   head.append(node('h3', '', `Room ${index + 1}`));
@@ -75,11 +75,20 @@ function renderRoom(side, index) {
     waveBlock.append(enemies);
     waves.append(waveBlock);
   });
-  room.append(head, waves);
+  room.append(head);
+  if (roomBuff) {
+    const buff = node('section', 'room-buff');
+    buff.setAttribute('aria-label', `Frontier Effect for Room ${index + 1}: ${roomBuff.name}`);
+    const label = node('p', 'room-buff-label', 'Frontier Effect');
+    label.append(node('strong', '', roomBuff.name));
+    buff.append(label, renderBuffCopy(roomBuff));
+    room.append(buff);
+  }
+  room.append(waves);
   return room;
 }
 
-function renderFrontier(frontier) {
+function renderFrontier(frontier, buffsById) {
   const details = node('details', 'frontier');
   const summary = node('summary');
   const heading = node('div');
@@ -88,7 +97,11 @@ function renderFrontier(frontier) {
   heading.append(node('span', 'frontier-kicker', bosses.join(' / ')));
   summary.append(heading);
   const rooms = node('div', 'rooms');
-  frontier.sides.forEach((side, index) => rooms.append(renderRoom(side, index)));
+  frontier.sides.forEach((side, index) => {
+    const roomBuff = side.roomBuffId ? buffsById.get(side.roomBuffId) : null;
+    if (side.roomBuffId && !roomBuff) throw new Error(`unknown room buff ${side.roomBuffId} for Frontier ${frontier.ordinal} Room ${index + 1}`);
+    rooms.append(renderRoom(side, index, roomBuff));
+  });
   details.append(summary, rooms);
   return details;
 }
@@ -131,15 +144,19 @@ function appendSemanticText(parent, text) {
   }
 }
 
-function renderBuff(buff) {
-  const article = node('article', 'buff');
-  article.append(node('h3', '', buff.name));
+function renderBuffCopy(buff) {
   const copy = node('p');
   for (const segment of buff.emphasis) {
     if (segment.emphasis === 'plain') appendSemanticText(copy, segment.text);
     else copy.append(semanticTerm(segment.text));
   }
-  article.append(copy);
+  return copy;
+}
+
+function renderBuff(buff) {
+  const article = node('article', 'buff');
+  article.append(node('h3', '', buff.name));
+  article.append(renderBuffCopy(buff));
   return article;
 }
 
@@ -157,8 +174,10 @@ async function start() {
   window.setInterval(() => {
     byId('cycle-status').querySelector('.remaining').textContent = formatRemaining(data?.version?.endsAt, Date.now());
   }, 60_000);
+  const buffsById = new Map(data.buffs.map((buff) => [buff.id, buff]));
+  if (buffsById.size !== data.buffs.length) throw new Error('room buff IDs must be unique');
   const frontierList = byId('frontiers');
-  data.nodes.forEach((frontier) => frontierList.append(renderFrontier(frontier)));
+  data.nodes.forEach((frontier) => frontierList.append(renderFrontier(frontier, buffsById)));
   const buffList = byId('buffs');
   data.buffs.forEach((buff) => buffList.append(renderBuff(buff)));
 

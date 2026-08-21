@@ -52,20 +52,33 @@ export function validate(data) {
   if (!version || version.endsAt !== `${version.endDate}T00:00:00.000Z`) fail(errors, 'version.endsAt must exactly derive from version.endDate at UTC midnight');
 
   if (!Array.isArray(data.buffs) || data.buffs.length !== 3) fail(errors, 'buffs must contain exactly three records');
+  const buffIds = new Set();
   for (const [index, buff] of (data.buffs ?? []).entries()) {
     if (!buff || typeof buff.id !== 'string' || !buff.name || typeof buff.description !== 'string') fail(errors, `buff ${index + 1} has invalid id/name/description`);
     if (!Array.isArray(buff.emphasis)) fail(errors, `buff ${index + 1} emphasis must be an array`);
+    if (typeof buff?.id === 'string') {
+      if (buffIds.has(buff.id)) fail(errors, `buff ${index + 1} duplicates id ${buff.id}`);
+      buffIds.add(buff.id);
+    }
   }
 
   const nodes = data.nodes;
   if (!Array.isArray(nodes) || nodes.length !== 5) fail(errors, 'nodes must contain exactly five records');
   const expectedSides = [2, 2, 2, 2, 3];
+  const mappedRoomBuffIds = [];
   for (const [nodeIndex, node] of (nodes ?? []).entries()) {
     if (!node || node.ordinal !== nodeIndex + 1 || !Array.isArray(node.sides) || node.sides.length !== expectedSides[nodeIndex]) {
       fail(errors, `node ${nodeIndex + 1} must have ${expectedSides[nodeIndex]} sides`); continue;
     }
     for (const [sideIndex, side] of node.sides.entries()) {
       if (!side || side.ordinal !== sideIndex + 1 || !number(side.sideHPMult) || side.sideHPMult <= 0) fail(errors, `node ${nodeIndex + 1} side ${sideIndex + 1} has impossible sideHPMult`);
+      if (nodeIndex === 4) {
+        if (typeof side?.roomBuffId !== 'string' || !side.roomBuffId) fail(errors, `node 5 side ${sideIndex + 1} must have a roomBuffId`);
+        else {
+          mappedRoomBuffIds.push(side.roomBuffId);
+          if (!buffIds.has(side.roomBuffId)) fail(errors, `node 5 side ${sideIndex + 1} references unknown room buff ${side.roomBuffId}`);
+        }
+      } else if (Object.hasOwn(side ?? {}, 'roomBuffId')) fail(errors, `node ${nodeIndex + 1} side ${sideIndex + 1} must not have a roomBuffId`);
       if (!side.elementMultipliers || !side.elements) fail(errors, `node ${nodeIndex + 1} side ${sideIndex + 1} is missing element mappings`);
       for (const element of ELEMENT_ORDER) {
         if (!number(side.elementMultipliers?.[element]) || !['weak', 'neutral', 'resist'].includes(side.elements?.[element])) fail(errors, `node ${nodeIndex + 1} side ${sideIndex + 1} has invalid ${element} mapping`);
@@ -87,6 +100,8 @@ export function validate(data) {
       }
     }
   }
+  if (new Set(mappedRoomBuffIds).size !== mappedRoomBuffIds.length) fail(errors, 'Fifth Frontier roomBuffId values must be unique');
+  if (mappedRoomBuffIds.length !== buffIds.size || [...buffIds].some((id) => !mappedRoomBuffIds.includes(id))) fail(errors, 'Fifth Frontier roomBuffId values must cover every current buff exactly once');
 
   if (!data.calculatedHP || data.calculatedHP.label !== 'Calculated HP (rounded per enemy)' || data.calculatedHP.formula !== 'round(baseHP[type] * nodeHPMult[node-1] * (enemy.hpMult || side.sideHPMult) / 10000)' || JSON.stringify(data.calculatedHP.nodeHPMult) !== JSON.stringify(NODE_HP_MULTIPLIERS)) fail(errors, 'calculatedHP formula/label/multipliers are incorrect');
 

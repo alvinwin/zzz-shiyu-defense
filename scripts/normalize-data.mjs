@@ -215,6 +215,15 @@ export function normalize({ sourceRoot = DEFAULT_SOURCE_ROOT, output = path.join
   const sideCounts = nodes.map((node) => node.sides.length);
   if (JSON.stringify(sideCounts) !== JSON.stringify([2, 2, 2, 2, 3])) throw new Error(`unexpected side cardinality ${sideCounts.join(',')}`);
   const buffs = selected.version.versionBuffIDs.map((id) => normalizeBuff(id, buffData[id]));
+  const roomBuffIds = buffs.map((buff) => buff.id);
+  if (new Set(roomBuffIds).size !== roomBuffIds.length) throw new Error('live Critical Node room buffs must have unique IDs');
+  const fifthFrontier = nodes.find((node) => node.ordinal === 5);
+  if (!fifthFrontier || fifthFrontier.sides.length !== roomBuffIds.length) throw new Error('Fifth Frontier rooms and room buffs must have equal cardinality');
+  fifthFrontier.sides = fifthFrontier.sides.map(({ ordinal, ...side }, index) => ({
+    ordinal,
+    roomBuffId: roomBuffIds[index],
+    ...side,
+  }));
   const result = {
     schemaVersion: 1,
     game: 'zzz',

@@ -13,7 +13,34 @@ test('current record validates with exact shape and provenance', () => {
   assert.deepEqual(validate(current), []);
   assert.deepEqual(current.nodes.map((node) => node.sides.length), [2, 2, 2, 2, 3]);
   assert.equal(current.buffs.length, 3);
+  assert.deepEqual(current.nodes[4].sides.map((side) => side.roomBuffId), [
+    '62000070',
+    '62000067',
+    '62000071',
+  ]);
   assert.equal(validateFile(path.join(ROOT, 'data/current.json')).length, 0);
+});
+
+test('room buff identities are complete, unique, and independent of buff display order', () => {
+  const reordered = structuredClone(current);
+  reordered.buffs.reverse();
+  assert.deepEqual(validate(reordered), []);
+
+  const missing = structuredClone(current);
+  delete missing.nodes[4].sides[1].roomBuffId;
+  assert.ok(validate(missing).some((error) => /side 2 must have a roomBuffId|cover every current buff/.test(error)));
+
+  const duplicate = structuredClone(current);
+  duplicate.nodes[4].sides[1].roomBuffId = duplicate.nodes[4].sides[0].roomBuffId;
+  assert.ok(validate(duplicate).some((error) => /roomBuffId values must be unique/.test(error)));
+
+  const unknown = structuredClone(current);
+  unknown.nodes[4].sides[1].roomBuffId = 'unknown-buff';
+  assert.ok(validate(unknown).some((error) => /references unknown room buff/.test(error)));
+
+  const misplaced = structuredClone(current);
+  misplaced.nodes[0].sides[0].roomBuffId = current.buffs[0].id;
+  assert.ok(validate(misplaced).some((error) => /must not have a roomBuffId/.test(error)));
 });
 
 test('cycle status is derived from current data and validates its UTC cutovers', () => {
