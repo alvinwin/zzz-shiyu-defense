@@ -7,6 +7,13 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await expect(page.locator('#cycle-status .remaining')).toHaveText(/remaining|Refresh pending/);
   await expect(page.locator('.frontier')).toHaveCount(5);
   await expect(page.locator('.buff')).toHaveCount(3);
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff')).toHaveCount(3);
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label strong')).toHaveText([
+    'Turbulent Resonance',
+    'Final Concerto',
+    'Rime and Thunder Breach',
+  ]);
+  await expect(page.locator('.frontier').nth(3).locator('.room-buff')).toHaveCount(0);
   await expect(page.locator('#cycle-status-title')).toHaveText('Current cycle');
   await expect(page.locator('.ticker-caption')).toHaveCount(0);
   await expect(page.locator('.hero .eyebrow')).toHaveText('Shiyu Defense');
@@ -43,7 +50,7 @@ test('shows complete compounds and calculated HP without overflow', async ({ pag
   await page.locator('.frontier').last().locator('summary').click();
   await expect(page.getByText('Lightfoot Rover MK II')).toBeVisible();
   await expect(page.getByText(/4.56M calculated HP/)).toBeVisible();
-  await expect(page.locator('.term', { hasText: 'CRIT DMG' })).toHaveText('CRIT DMG');
+  await expect(page.locator('.room-buff .term', { hasText: 'CRIT DMG' })).toHaveText('CRIT DMG');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
 });
