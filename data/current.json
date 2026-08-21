@@ -925,6 +925,7 @@
       "sides": [
         {
           "ordinal": 1,
+          "roomBuffId": "62000070",
           "sideHPMult": 500,
           "elementMultipliers": {
             "ice": 1,
@@ -1013,6 +1014,7 @@
         },
         {
           "ordinal": 2,
+          "roomBuffId": "62000067",
           "sideHPMult": 360,
           "elementMultipliers": {
             "ice": 1.2,
@@ -1102,6 +1104,7 @@
         },
         {
           "ordinal": 3,
+          "roomBuffId": "62000071",
           "sideHPMult": 620,
           "elementMultipliers": {
             "ice": 1,

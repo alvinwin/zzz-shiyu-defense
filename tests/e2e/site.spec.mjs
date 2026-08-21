@@ -45,6 +45,21 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await expect(page.locator('.disclaimer')).toContainText('Attribute icon artwork © HoYoverse.');
 });
 
+test('renders room buffs by explicit identity when the buff list is reordered', async ({ page }) => {
+  await page.route('**/data/current.json', async (route) => {
+    const response = await route.fetch();
+    const data = await response.json();
+    data.buffs.reverse();
+    await route.fulfill({ response, json: data });
+  });
+  await page.goto('/');
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label strong')).toHaveText([
+    'Turbulent Resonance',
+    'Final Concerto',
+    'Rime and Thunder Breach',
+  ]);
+});
+
 test('shows complete compounds and calculated HP without overflow', async ({ page }) => {
   await page.goto('/');
   await page.locator('.frontier').last().locator('summary').click();

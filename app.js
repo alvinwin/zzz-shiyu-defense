@@ -88,7 +88,7 @@ function renderRoom(side, index, roomBuff) {
   return room;
 }
 
-function renderFrontier(frontier, roomBuffs = []) {
+function renderFrontier(frontier, buffsById) {
   const details = node('details', 'frontier');
   const summary = node('summary');
   const heading = node('div');
@@ -97,7 +97,11 @@ function renderFrontier(frontier, roomBuffs = []) {
   heading.append(node('span', 'frontier-kicker', bosses.join(' / ')));
   summary.append(heading);
   const rooms = node('div', 'rooms');
-  frontier.sides.forEach((side, index) => rooms.append(renderRoom(side, index, roomBuffs[index])));
+  frontier.sides.forEach((side, index) => {
+    const roomBuff = side.roomBuffId ? buffsById.get(side.roomBuffId) : null;
+    if (side.roomBuffId && !roomBuff) throw new Error(`unknown room buff ${side.roomBuffId} for Frontier ${frontier.ordinal} Room ${index + 1}`);
+    rooms.append(renderRoom(side, index, roomBuff));
+  });
   details.append(summary, rooms);
   return details;
 }
@@ -170,8 +174,10 @@ async function start() {
   window.setInterval(() => {
     byId('cycle-status').querySelector('.remaining').textContent = formatRemaining(data?.version?.endsAt, Date.now());
   }, 60_000);
+  const buffsById = new Map(data.buffs.map((buff) => [buff.id, buff]));
+  if (buffsById.size !== data.buffs.length) throw new Error('room buff IDs must be unique');
   const frontierList = byId('frontiers');
-  data.nodes.forEach((frontier) => frontierList.append(renderFrontier(frontier, frontier.ordinal === 5 ? data.buffs : [])));
+  data.nodes.forEach((frontier) => frontierList.append(renderFrontier(frontier, buffsById)));
   const buffList = byId('buffs');
   data.buffs.forEach((buff) => buffList.append(renderBuff(buff)));
 
