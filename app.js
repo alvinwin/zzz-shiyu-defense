@@ -175,7 +175,9 @@ async function start() {
   const refreshCycleStatus = () => {
     const now = Date.now();
     remaining.textContent = formatRemaining(data?.version?.endsAt, now);
-    byId('cycle-refresh-note').hidden = !(strictIsoTimestamp(data?.version?.endsAt) > now);
+    const isActive = strictIsoTimestamp(data?.version?.endsAt) > now;
+    byId('cycle-status-title').hidden = !isActive;
+    byId('cycle-refresh-note').hidden = !isActive;
   };
   refreshCycleStatus();
   window.setInterval(refreshCycleStatus, 60_000);

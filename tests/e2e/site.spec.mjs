@@ -5,6 +5,7 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await expect(page.locator('#cycle-status .cycle-dates')).toHaveText('08/07–08/21');
   await expect(page.locator('#cycle-status .verified')).toHaveText('Verified Aug 14');
   await expect(page.locator('#cycle-status .remaining')).toHaveText(/remaining|Refresh pending/);
+  await expect(page.locator('#cycle-status-title')).toBeHidden();
   await expect(page.locator('#cycle-refresh-note')).toBeHidden();
   await expect(page.locator('.frontier')).toHaveCount(5);
   await expect(page.locator('.buff')).toHaveCount(3);
@@ -55,7 +56,7 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   await expect(page.locator('.disclaimer')).toContainText('Attribute icon artwork © HoYoverse.');
 });
 
-test('shows the existing lifecycle note only while the cycle is active', async ({ page }) => {
+test('shows existing active-state copy only while the cycle is active', async ({ page }) => {
   await page.route('**/data/current.json', async (route) => {
     const response = await route.fetch();
     const data = await response.json();
@@ -63,6 +64,8 @@ test('shows the existing lifecycle note only while the cycle is active', async (
     await route.fulfill({ response, json: data });
   });
   await page.goto('/');
+  await expect(page.locator('#cycle-status-title')).toBeVisible();
+  await expect(page.locator('#cycle-status-title')).toHaveText('Current cycle');
   await expect(page.locator('#cycle-refresh-note')).toBeVisible();
   await expect(page.locator('#cycle-refresh-note')).toHaveText('When this cycle ends, the site checks for the next one and keeps retrying until verified data is available.');
 });
