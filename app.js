@@ -1,4 +1,4 @@
-import { formatRemaining } from './scripts/lib/remaining-time.mjs';
+import { formatRemaining, strictIsoTimestamp } from './scripts/lib/remaining-time.mjs';
 
 const byId = (id) => document.getElementById(id);
 const node = (tag, className, text) => {
@@ -165,15 +165,20 @@ async function start() {
   if (!response.ok) throw new Error(`data request failed: ${response.status}`);
   const data = await response.json();
 
+  const remaining = node('span', 'remaining');
+  remaining.setAttribute('aria-live', 'off');
   byId('cycle-status').replaceChildren(
     node('span', 'cycle-dates', `${formatDate(data.version.startDate)}–${formatDate(data.version.endDate)}`),
     node('span', 'verified', `Verified ${formatCheckedDate(data.provenance.fetchedDate)}`),
-    node('span', 'remaining', formatRemaining(data?.version?.endsAt, Date.now())),
+    remaining,
   );
-  byId('cycle-status').querySelector('.remaining').setAttribute('aria-live', 'off');
-  window.setInterval(() => {
-    byId('cycle-status').querySelector('.remaining').textContent = formatRemaining(data?.version?.endsAt, Date.now());
-  }, 60_000);
+  const refreshCycleStatus = () => {
+    const now = Date.now();
+    remaining.textContent = formatRemaining(data?.version?.endsAt, now);
+    byId('cycle-refresh-note').hidden = !(strictIsoTimestamp(data?.version?.endsAt) > now);
+  };
+  refreshCycleStatus();
+  window.setInterval(refreshCycleStatus, 60_000);
   const buffsById = new Map(data.buffs.map((buff) => [buff.id, buff]));
   if (buffsById.size !== data.buffs.length) throw new Error('room buff IDs must be unique');
   const frontierList = byId('frontiers');
