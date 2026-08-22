@@ -13,11 +13,10 @@ test('current record validates with exact shape and provenance', () => {
   assert.deepEqual(validate(current), []);
   assert.deepEqual(current.nodes.map((node) => node.sides.length), [2, 2, 2, 2, 3]);
   assert.equal(current.buffs.length, 3);
-  assert.deepEqual(current.nodes[4].sides.map((side) => side.roomBuffId), [
-    '62000070',
-    '62000067',
-    '62000071',
-  ]);
+  assert.deepEqual(
+    current.nodes[4].sides.map((side) => side.roomBuffId),
+    current.buffs.map((buff) => buff.id),
+  );
   assert.equal(validateFile(path.join(ROOT, 'data/current.json')).length, 0);
 });
 
@@ -49,28 +48,28 @@ test('cycle status is derived from current data and validates its UTC cutovers',
     schemaVersion: 1,
     mode: 'shiyu-defense',
     status: 'current',
-    startsAt: '2026-08-07T00:00:00.000Z',
-    endsAt: '2026-08-21T00:00:00.000Z',
-    checkedAt: '2026-08-14T00:00:00.000Z',
+    startsAt: `${current.version.startDate}T00:00:00.000Z`,
+    endsAt: current.version.endsAt,
+    checkedAt: `${current.provenance.fetchedDate}T00:00:00.000Z`,
   });
   assert.deepEqual(validateCycleStatus(status, current), []);
-  assert.notDeepEqual(validateCycleStatus({ ...status, endsAt: '2026-08-22T00:00:00.000Z' }, current), []);
+  const wrongEnd = new Date(Date.parse(status.endsAt) + 86_400_000).toISOString();
+  assert.notDeepEqual(validateCycleStatus({ ...status, endsAt: wrongEnd }, current), []);
   const invalidCalendar = structuredClone(current);
   invalidCalendar.version.endsAt = '2026-02-31T00:00:00.000Z';
   invalidCalendar.version.endDate = '2026-02-31';
   assert.ok(validateCycleStatus(cycleStatusFromData(invalidCalendar), invalidCalendar).some((error) => /ISO timestamp/.test(error)));
 });
 
-test('five known HP samples use the pinned formula', () => {
-  const samples = [
-    [current.nodes[0].sides[0].waves[0].enemies[0], 278913],
-    [current.nodes[0].sides[0].waves[1].enemies[0], 1195788],
-    [current.nodes[0].sides[0].waves[3].enemies[0], 1550601],
-    [current.nodes[3].sides[1].waves[0].enemies[0], 6070187],
-    [current.nodes[4].sides[2].waves[0].enemies[0], 4556701],
-  ];
-  for (const [enemy, expected] of samples) assert.equal(enemy.hpEach, expected, `${enemy.id} hpEach`);
-  assert.equal(current.nodes[3].sides[1].waves[0].enemies[0].hpGroup, 12140374);
+test('all current HP records use the pinned formula', () => {
+  assert.deepEqual(NODE_HP_MULTIPLIERS, [10527, 15667, 19389, 21437, 24795]);
+  current.nodes.forEach((node, nodeIndex) => {
+    node.sides.forEach((side) => side.waves.forEach((wave) => wave.enemies.forEach((enemy) => {
+      const expected = Math.round(enemy.baseHP * NODE_HP_MULTIPLIERS[nodeIndex] * enemy.hpMult / 10000);
+      assert.equal(enemy.hpEach, expected, `${enemy.id} hpEach`);
+      assert.equal(enemy.hpGroup, expected * enemy.count, `${enemy.id} hpGroup`);
+    })));
+  });
   assert.deepEqual(current.calculatedHP.nodeHPMult, NODE_HP_MULTIPLIERS);
 });
 
@@ -107,8 +106,11 @@ test('selection reads vLive and rejects other modes/schemas/future entries', () 
 
 test('validator accepts a synthetic next live ordinal with ordered ISO dates', () => {
   const next = structuredClone(current);
-  next.version = { ...next.version, ordinal: 55, id: '3.1.2', name: '3.1 Phase 2', startDate: '2026-08-22', endDate: '2026-09-05', endsAt: '2026-09-05T00:00:00.000Z' };
-  next.provenance = { ...next.provenance, liveOrdinal: 55, liveId: '3.1.2' };
+  const startDate = current.version.endDate;
+  const endDate = new Date(Date.parse(`${startDate}T00:00:00.000Z`) + (14 * 86_400_000)).toISOString().slice(0, 10);
+  const ordinal = current.version.ordinal + 1;
+  next.version = { ...next.version, ordinal, id: 'test-next-live', name: 'Test next live', startDate, endDate, endsAt: `${endDate}T00:00:00.000Z` };
+  next.provenance = { ...next.provenance, liveOrdinal: ordinal, liveId: 'test-next-live', fetchedDate: startDate };
   assert.deepEqual(validate(next), []);
 });
 
