@@ -34,6 +34,7 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   const compact = page.viewportSize().width <= 760;
   await expect(page.locator('.masthead')).toHaveCSS('min-height', compact ? '107px' : '70px');
   await expect(page.locator('.hero')).toHaveCSS('min-height', compact ? '420px' : '430px');
+  await expect(page.locator('.hero-copy')).toHaveCSS('min-height', compact ? '48.64px' : '54.72px');
   const tickerHeight = await page.locator('.ticker-inner').evaluate((element) => element.getBoundingClientRect().height);
   expect(tickerHeight).toBeGreaterThanOrEqual(54);
   expect(tickerHeight).toBeLessThanOrEqual(56);
