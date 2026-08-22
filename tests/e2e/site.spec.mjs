@@ -1,28 +1,53 @@
 import { expect, test } from '@playwright/test';
+import fs from 'node:fs';
+
+const current = JSON.parse(fs.readFileSync(new URL('../../data/current.json', import.meta.url), 'utf8'));
+const buffsById = new Map(current.buffs.map((buff) => [buff.id, buff]));
+const fifthFrontierBuffNames = current.nodes[4].sides.map((side) => buffsById.get(side.roomBuffId).name);
+const affinityIconCount = current.nodes.reduce((total, frontier) => total + frontier.sides.reduce(
+  (sideTotal, side) => sideTotal + side.weaknesses.length + side.resistances.length,
+  0,
+), 0);
+
+function displayDate(iso) {
+  return `${iso.slice(5, 7)}/${iso.slice(8, 10)}`;
+}
+
+function verifiedDate(iso) {
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${monthNames[Number(iso.slice(5, 7)) - 1]} ${Number(iso.slice(8, 10))}`;
+}
+
+async function routeCurrentData(page, mutate) {
+  await page.route('**/data/current.json', async (route) => {
+    const response = await route.fetch();
+    const data = await response.json();
+    mutate(data);
+    await route.fulfill({ response, json: data });
+  });
+}
 
 test('renders the current cycle in encounter-first order', async ({ page }) => {
+  const runtimeErrors = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') runtimeErrors.push(message.text());
+  });
+  page.on('pageerror', (error) => runtimeErrors.push(error.message));
+  await routeCurrentData(page, (data) => { data.version.endsAt = '2000-01-01T00:00:00.000Z'; });
   await page.goto('/');
-  await expect(page.locator('#cycle-status .cycle-dates')).toHaveText('08/07–08/21');
-  await expect(page.locator('#cycle-status .verified')).toHaveText('Verified Aug 14');
+  await expect(page.locator('#cycle-status .cycle-dates')).toHaveText(`${displayDate(current.version.startDate)}–${displayDate(current.version.endDate)}`);
+  await expect(page.locator('#cycle-status .verified')).toHaveText(`Verified ${verifiedDate(current.provenance.fetchedDate)}`);
   await expect(page.locator('#cycle-status .remaining')).toHaveText(/remaining|Refresh pending/);
   await expect(page.locator('#cycle-status-title')).toBeHidden();
   await expect(page.locator('#cycle-refresh-note')).toBeHidden();
   await expect(page.locator('.frontier')).toHaveCount(5);
   await expect(page.locator('.buff')).toHaveCount(3);
   await expect(page.locator('.frontier').nth(4).locator('.room-buff')).toHaveCount(3);
-  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label')).toHaveText([
-    'Frontier EffectTurbulent Resonance',
-    'Frontier EffectFinal Concerto',
-    'Frontier EffectRime and Thunder Breach',
-  ]);
-  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label strong')).toHaveText([
-    'Turbulent Resonance',
-    'Final Concerto',
-    'Rime and Thunder Breach',
-  ]);
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label')).toHaveText(fifthFrontierBuffNames.map((name) => `Frontier Effect${name}`));
+  await expect(page.locator('.frontier').nth(4).locator('.room-buff-label strong')).toHaveText(fifthFrontierBuffNames);
   await expect(page.locator('.frontier').nth(4).locator('.room-buff').first()).toHaveAttribute(
     'aria-label',
-    'Frontier Effect for Room 1: Turbulent Resonance',
+    `Frontier Effect for Room 1: ${fifthFrontierBuffNames[0]}`,
   );
   await expect(page.locator('.frontier').nth(3).locator('.room-buff')).toHaveCount(0);
   await expect(page.locator('#cycle-status-title')).toHaveText('Current cycle');
@@ -49,12 +74,13 @@ test('renders the current cycle in encounter-first order', async ({ page }) => {
   ]);
   expect(buffs.y).toBeGreaterThan(frontiers.y + frontiers.height);
   await expect(page.locator('.feedback')).toHaveCSS('position', 'static');
-  await expect(page.locator('.tag .element-icon')).toHaveCount(30);
+  await expect(page.locator('.tag .element-icon')).toHaveCount(affinityIconCount);
   expect(await page.locator('.tag').evaluateAll((tags) => tags.every((tag) => {
     const icon = tag.querySelector('.element-icon');
     return !icon || (icon.getAttribute('aria-hidden') === 'true' && icon.getAttribute('alt') === '');
   }))).toBe(true);
   await expect(page.locator('.disclaimer')).toContainText('Attribute icon artwork © HoYoverse.');
+  expect(runtimeErrors).toEqual([]);
 });
 
 test('shows existing active-state copy only while the cycle is active', async ({ page }) => {
@@ -80,16 +106,21 @@ test('renders room buffs by explicit identity when the buff list is reordered', 
   });
   await page.goto('/');
   await expect(page.locator('.frontier').nth(4).locator('.room-buff-label strong')).toHaveText([
-    'Turbulent Resonance',
-    'Final Concerto',
-    'Rime and Thunder Breach',
+    ...fifthFrontierBuffNames,
   ]);
 });
 
 test('shows complete compounds and calculated HP without overflow', async ({ page }) => {
+  await routeCurrentData(page, (data) => {
+    const enemy = data.nodes[4].sides[2].waves[0].enemies[0];
+    Object.assign(enemy, { name: 'Compound: Test Target', count: 1, hpEach: 4_556_701, hpGroup: 4_556_701 });
+    const roomBuff = data.buffs.find((buff) => buff.id === data.nodes[4].sides[2].roomBuffId);
+    roomBuff.description = 'CRIT DMG increases.';
+    roomBuff.emphasis = [{ text: 'CRIT DMG', emphasis: 'bold' }, { text: ' increases.', emphasis: 'plain' }];
+  });
   await page.goto('/');
   await page.locator('.frontier').last().locator('summary').click();
-  await expect(page.getByText('Lightfoot Rover MK II')).toBeVisible();
+  await expect(page.getByText('Compound: Test Target')).toBeVisible();
   await expect(page.getByText(/4.56M calculated HP/)).toBeVisible();
   await expect(page.locator('.room-buff .term', { hasText: 'CRIT DMG' })).toHaveText('CRIT DMG');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
@@ -141,6 +172,10 @@ test('uses direct player-facing labels without editorial slogans', async ({ page
 });
 
 test('connects supported combat terms to their field notes', async ({ page }) => {
+  await routeCurrentData(page, (data) => {
+    data.buffs[0].description = 'Attribute Anomaly DMG increases.';
+    data.buffs[0].emphasis = [{ text: 'Attribute Anomaly DMG', emphasis: 'plain' }, { text: ' increases.', emphasis: 'plain' }];
+  });
   await page.goto('/');
   const anomaly = page.getByRole('link', { name: 'Attribute Anomaly DMG: read the Attribute Anomaly field note' });
 
