@@ -67,7 +67,7 @@ test('shows existing active-state copy only while the cycle is active', async ({
   await expect(page.locator('#cycle-status-title')).toBeVisible();
   await expect(page.locator('#cycle-status-title')).toHaveText('Current cycle');
   await expect(page.locator('#cycle-refresh-note')).toBeVisible();
-  await expect(page.locator('#cycle-refresh-note')).toHaveText('When this cycle ends, the site checks for the next one and keeps retrying until verified data is available.');
+  await expect(page.locator('#cycle-refresh-note')).toHaveText('When this cycle ends, the page checks for the next verified cycle.');
 });
 
 test('renders room buffs by explicit identity when the buff list is reordered', async ({ page }) => {
@@ -132,7 +132,9 @@ test('links the shared brand back to the homepage', async ({ page }) => {
 test('uses direct player-facing labels without editorial slogans', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.getByRole('heading', { name: 'Current frontiers', exact: true })).toBeVisible();
+  await expect(page.locator('.hero-copy')).toHaveText('Frontiers, room affinities, enemy waves, and buffs for this cycle.');
+  await expect(page.getByRole('heading', { name: 'Frontier reports', exact: true })).toBeVisible();
+  await expect(page.locator('.section-note')).toHaveText('Start with the frontier, then scan the room affinities and waves.');
   await expect(page.getByRole('heading', { name: 'Current buffs', exact: true })).toBeVisible();
   await expect(page.getByText('Take the useful note with you.')).toHaveCount(0);
 });
