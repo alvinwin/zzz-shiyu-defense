@@ -120,9 +120,10 @@ test('shows complete compounds and calculated HP without overflow', async ({ pag
   });
   await page.goto('/');
   await page.locator('.frontier').last().locator('summary').click();
-  await expect(page.getByText('Compound: Test Target')).toBeVisible();
-  await expect(page.getByText(/4.56M calculated HP/)).toBeVisible();
-  await expect(page.locator('.room-buff .term', { hasText: 'CRIT DMG' })).toHaveText('CRIT DMG');
+  const targetRoom = page.locator('.frontier').last().locator('.room').nth(2);
+  await expect(targetRoom.getByText('Compound: Test Target')).toBeVisible();
+  await expect(targetRoom.getByText(/4.56M calculated HP/)).toBeVisible();
+  await expect(targetRoom.locator('.room-buff .term', { hasText: 'CRIT DMG' })).toHaveText('CRIT DMG');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
 });
@@ -177,7 +178,7 @@ test('connects supported combat terms to their field notes', async ({ page }) =>
     data.buffs[0].emphasis = [{ text: 'Attribute Anomaly DMG', emphasis: 'plain' }, { text: ' increases.', emphasis: 'plain' }];
   });
   await page.goto('/');
-  const anomaly = page.getByRole('link', { name: 'Attribute Anomaly DMG: read the Attribute Anomaly field note' });
+  const anomaly = page.locator('.buff').first().getByRole('link', { name: 'Attribute Anomaly DMG: read the Attribute Anomaly field note' });
 
   await expect(anomaly).toHaveCount(1);
   await expect(anomaly).toHaveAttribute('href', 'https://sixthstreet.wiki/terms/attribute-anomaly/');
