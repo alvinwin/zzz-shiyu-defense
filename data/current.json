@@ -3,19 +3,153 @@
   "game": "zzz",
   "mode": "Critical Node",
   "version": {
-    "ordinal": 56,
-    "id": "3.1.3",
-    "name": "3.1 Phase 3",
-    "startDate": "2026-09-04",
-    "endDate": "2026-09-18",
-    "endsAt": "2026-09-18T00:00:00.000Z",
+    "ordinal": 57,
+    "id": "3.2.1",
+    "name": "3.2 Phase 1",
+    "startDate": "2026-09-18",
+    "endDate": "2026-10-02",
+    "endsAt": "2026-10-02T00:00:00.000Z",
     "live": true
   },
   "buffs": [
     {
-      "id": "62000075",
-      "name": "Frosty Daze",
-      "description": "Agent Ether DMG and Ice DMG increase by 35%, while their CRIT DMG increases by 25%.\nWhen an Agent with Attack specialty hits a Stunned enemy, enemy DEF drops by 25% for 5s. Repeated triggers reset the duration.",
+      "id": "62000077",
+      "name": "Razor-Sharp Arrowheads",
+      "description": "Agent Sharp DMG increases by 25%, and DEF increases by 15%.\nWhen an Agent hits an enemy and triggers a critical hit, if the enemy is Stunned, the Stun DMG Multiplier increases by 20% for 10s. Repeated triggers reset the duration.",
+      "emphasis": [
+        {
+          "text": "Agent ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "Sharp DMG",
+          "emphasis": "bold"
+        },
+        {
+          "text": " increases by ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "25%",
+          "emphasis": "bold"
+        },
+        {
+          "text": ", and DEF increases by ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "15%",
+          "emphasis": "bold"
+        },
+        {
+          "text": ".",
+          "emphasis": "plain"
+        },
+        {
+          "text": "\nWhen an Agent hits an enemy and triggers a critical hit, if the enemy is ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "Stunned",
+          "emphasis": "bold"
+        },
+        {
+          "text": ", the ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "Stun DMG Multiplier",
+          "emphasis": "bold"
+        },
+        {
+          "text": " increases by ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "20%",
+          "emphasis": "bold"
+        },
+        {
+          "text": " for 10s. Repeated triggers reset the duration.",
+          "emphasis": "plain"
+        }
+      ]
+    },
+    {
+      "id": "62000078",
+      "name": "Tide of Anomalies",
+      "description": "Agent Anomaly Buildup Rate increases by 15%, and Attribute Anomaly DMG dealt increases by 20%.\nIf there are 2/3 Agents in the squad with the Anomaly specialty, Agent Anomaly Proficiency increases by 20/60.",
+      "emphasis": [
+        {
+          "text": "Agent ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "Anomaly Buildup Rate",
+          "emphasis": "bold"
+        },
+        {
+          "text": " increases by ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "15%",
+          "emphasis": "bold"
+        },
+        {
+          "text": ", and ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "Attribute Anomaly DMG",
+          "emphasis": "bold"
+        },
+        {
+          "text": " dealt increases by ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "20%",
+          "emphasis": "bold"
+        },
+        {
+          "text": ".",
+          "emphasis": "plain"
+        },
+        {
+          "text": "\nIf there are 2/3 Agents in the squad with the ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "Anomaly",
+          "emphasis": "bold"
+        },
+        {
+          "text": " specialty, Agent ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "Anomaly Proficiency",
+          "emphasis": "bold"
+        },
+        {
+          "text": " increases by ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "20/60",
+          "emphasis": "bold"
+        },
+        {
+          "text": ".",
+          "emphasis": "plain"
+        }
+      ]
+    },
+    {
+      "id": "62000079",
+      "name": "Tainted Dreams",
+      "description": "Agent Ether DMG increases by 20%, and Anomaly Proficiency increases by 20.\nWhen Agents inflict an Attribute Anomaly on enemies, the Stun DMG Multiplier increases by 20% for 15s. Repeated triggers reset the duration.",
       "emphasis": [
         {
           "text": "Agent ",
@@ -26,129 +160,7 @@
           "emphasis": "bold"
         },
         {
-          "text": " and ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "Ice DMG",
-          "emphasis": "bold"
-        },
-        {
-          "text": " increase by ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "35%",
-          "emphasis": "bold"
-        },
-        {
-          "text": ", while their CRIT DMG increases by ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "25%",
-          "emphasis": "bold"
-        },
-        {
-          "text": ".",
-          "emphasis": "plain"
-        },
-        {
-          "text": "\nWhen an Agent with ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "Attack",
-          "emphasis": "bold"
-        },
-        {
-          "text": " specialty hits a ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "Stunned",
-          "emphasis": "bold"
-        },
-        {
-          "text": " enemy, enemy ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "DEF",
-          "emphasis": "bold"
-        },
-        {
-          "text": " drops by ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "25%",
-          "emphasis": "bold"
-        },
-        {
-          "text": " for 5s. Repeated triggers reset the duration.",
-          "emphasis": "plain"
-        }
-      ]
-    },
-    {
-      "id": "62000070",
-      "name": "Turbulent Resonance",
-      "description": "If there are 2/3 Agents with the Anomaly specialty in the squad, Attribute Anomaly DMG dealt by Agents increases by 10%/60%, and the whole squad initially gains 500/1500 Decibels upon entering combat.",
-      "emphasis": [
-        {
-          "text": "If there are 2/3 Agents with the ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "Anomaly",
-          "emphasis": "bold"
-        },
-        {
-          "text": " specialty in the squad, ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "Attribute Anomaly DMG",
-          "emphasis": "bold"
-        },
-        {
-          "text": " dealt by Agents increases by ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "10%/60%",
-          "emphasis": "bold"
-        },
-        {
-          "text": ", and the whole squad initially gains ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "500/1500",
-          "emphasis": "bold"
-        },
-        {
-          "text": " Decibels upon entering combat.",
-          "emphasis": "plain"
-        }
-      ]
-    },
-    {
-      "id": "62000076",
-      "name": "Lightning Piercer",
-      "description": "Agent DEF increases by 15%, and attacks against enemies ignore 20% of their Electric RES.\nAfter an Agent uses EX Special Attack, their CRIT Rate increases by 5% and CRIT DMG increases by 20% for 15s. Repeated triggers reset the duration.",
-      "emphasis": [
-        {
-          "text": "Agent DEF increases by ",
-          "emphasis": "plain"
-        },
-        {
-          "text": "15%",
-          "emphasis": "bold"
-        },
-        {
-          "text": ", and attacks against enemies ignore ",
+          "text": " increases by ",
           "emphasis": "plain"
         },
         {
@@ -156,11 +168,19 @@
           "emphasis": "bold"
         },
         {
-          "text": " of their ",
+          "text": ", and ",
           "emphasis": "plain"
         },
         {
-          "text": "Electric RES",
+          "text": "Anomaly Proficiency",
+          "emphasis": "bold"
+        },
+        {
+          "text": " increases by ",
+          "emphasis": "plain"
+        },
+        {
+          "text": "20",
           "emphasis": "bold"
         },
         {
@@ -168,23 +188,23 @@
           "emphasis": "plain"
         },
         {
-          "text": "\nAfter an Agent uses ",
+          "text": "\nWhen Agents inflict an ",
           "emphasis": "plain"
         },
         {
-          "text": "EX Special Attack",
+          "text": "Attribute Anomaly",
           "emphasis": "bold"
         },
         {
-          "text": ", their CRIT Rate increases by ",
+          "text": " on enemies, the ",
           "emphasis": "plain"
         },
         {
-          "text": "5%",
+          "text": "Stun DMG Multiplier",
           "emphasis": "bold"
         },
         {
-          "text": " and CRIT DMG increases by ",
+          "text": " increases by ",
           "emphasis": "plain"
         },
         {
@@ -204,105 +224,6 @@
       "sides": [
         {
           "ordinal": 1,
-          "sideHPMult": 175,
-          "elementMultipliers": {
-            "ice": 1,
-            "fire": 0.8,
-            "electric": 1,
-            "ether": 1.2,
-            "physical": 0.8,
-            "wind": 1
-          },
-          "elements": {
-            "ice": "neutral",
-            "fire": "weak",
-            "electric": "neutral",
-            "ether": "resist",
-            "physical": "weak",
-            "wind": "neutral"
-          },
-          "weaknesses": [
-            "fire",
-            "physical"
-          ],
-          "resistances": [
-            "ether"
-          ],
-          "waves": [
-            {
-              "ordinal": 1,
-              "enemies": [
-                {
-                  "id": "10032",
-                  "name": "Rookie Jaeger",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 2,
-                  "hpMult": 175,
-                  "baseHP": 1373,
-                  "hpEach": 252937,
-                  "hpGroup": 505874
-                },
-                {
-                  "id": "10022",
-                  "name": "Light Jaeger",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 2,
-                  "hpMult": 175,
-                  "baseHP": 1123,
-                  "hpEach": 206882,
-                  "hpGroup": 413764
-                }
-              ]
-            },
-            {
-              "ordinal": 2,
-              "enemies": [
-                {
-                  "id": "10125",
-                  "name": "Lightfoot Rover",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 1,
-                  "hpMult": 175,
-                  "baseHP": 7097,
-                  "hpEach": 1307427,
-                  "hpGroup": 1307427
-                }
-              ]
-            },
-            {
-              "ordinal": 3,
-              "enemies": [
-                {
-                  "id": "10120",
-                  "name": "Heavy Striker",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 1,
-                  "hpMult": 175,
-                  "baseHP": 8414,
-                  "hpEach": 1550048,
-                  "hpGroup": 1550048
-                },
-                {
-                  "id": "10022",
-                  "name": "Light Jaeger",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 2,
-                  "hpMult": 175,
-                  "baseHP": 1123,
-                  "hpEach": 206882,
-                  "hpGroup": 413764
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "ordinal": 2,
           "sideHPMult": 175,
           "elementMultipliers": {
             "ice": 0.8,
@@ -330,15 +251,15 @@
               "ordinal": 1,
               "enemies": [
                 {
-                  "id": "10038",
-                  "name": "Tyrfing",
-                  "type": 0,
-                  "typeName": "normal",
+                  "id": "12000",
+                  "name": "Fossor",
+                  "type": 1,
+                  "typeName": "elite",
                   "count": 3,
                   "hpMult": 175,
-                  "baseHP": 1123,
-                  "hpEach": 206882,
-                  "hpGroup": 620646
+                  "baseHP": 1514,
+                  "hpEach": 278913,
+                  "hpGroup": 836739
                 }
               ]
             },
@@ -346,15 +267,15 @@
               "ordinal": 2,
               "enemies": [
                 {
-                  "id": "10100",
-                  "name": "Arlaune",
+                  "id": "10102",
+                  "name": "Armored Hati",
                   "type": 0,
                   "typeName": "normal",
                   "count": 1,
                   "hpMult": 175,
-                  "baseHP": 4905,
-                  "hpEach": 903611,
-                  "hpGroup": 903611
+                  "baseHP": 6491,
+                  "hpEach": 1195788,
+                  "hpGroup": 1195788
                 }
               ]
             },
@@ -362,26 +283,26 @@
               "ordinal": 3,
               "enemies": [
                 {
-                  "id": "10002",
-                  "name": "Alpeca",
-                  "type": 0,
-                  "typeName": "normal",
+                  "id": "12000",
+                  "name": "Fossor",
+                  "type": 1,
+                  "typeName": "elite",
                   "count": 2,
                   "hpMult": 175,
-                  "baseHP": 1123,
-                  "hpEach": 206882,
-                  "hpGroup": 413764
+                  "baseHP": 1514,
+                  "hpEach": 278913,
+                  "hpGroup": 557826
                 },
                 {
-                  "id": "10038",
-                  "name": "Tyrfing",
-                  "type": 0,
-                  "typeName": "normal",
+                  "id": "12002",
+                  "name": "Sordidus",
+                  "type": 1,
+                  "typeName": "elite",
                   "count": 2,
                   "hpMult": 175,
-                  "baseHP": 1123,
-                  "hpEach": 206882,
-                  "hpGroup": 413764
+                  "baseHP": 1514,
+                  "hpEach": 278913,
+                  "hpGroup": 557826
                 }
               ]
             },
@@ -389,15 +310,128 @@
               "ordinal": 4,
               "enemies": [
                 {
-                  "id": "10117",
-                  "name": "Hati",
+                  "id": "10110",
+                  "name": "Farbauti",
                   "type": 0,
                   "typeName": "normal",
                   "count": 1,
                   "hpMult": 175,
-                  "baseHP": 5890,
-                  "hpEach": 1085071,
-                  "hpGroup": 1085071
+                  "baseHP": 8417,
+                  "hpEach": 1550601,
+                  "hpGroup": 1550601
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "sideHPMult": 175,
+          "elementMultipliers": {
+            "ice": 1,
+            "fire": 1,
+            "electric": 0.8,
+            "ether": 0.8,
+            "physical": 1,
+            "wind": 1
+          },
+          "elements": {
+            "ice": "neutral",
+            "fire": "neutral",
+            "electric": "weak",
+            "ether": "weak",
+            "physical": "neutral",
+            "wind": "neutral"
+          },
+          "weaknesses": [
+            "electric",
+            "ether"
+          ],
+          "resistances": [],
+          "waves": [
+            {
+              "ordinal": 1,
+              "enemies": [
+                {
+                  "id": "22001",
+                  "name": "Miasmic Trooper: Shieldguard",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 3,
+                  "hpMult": 175,
+                  "baseHP": 1628,
+                  "hpEach": 299914,
+                  "hpGroup": 899742
+                }
+              ]
+            },
+            {
+              "ordinal": 2,
+              "enemies": [
+                {
+                  "id": "10131",
+                  "name": "Tarasque Mixer",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 1,
+                  "hpMult": 175,
+                  "baseHP": 8835,
+                  "hpEach": 1627606,
+                  "hpGroup": 1627606
+                }
+              ]
+            },
+            {
+              "ordinal": 3,
+              "enemies": [
+                {
+                  "id": "22000",
+                  "name": "Miasmic Trooper: Cannoneer",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 2,
+                  "hpMult": 175,
+                  "baseHP": 1628,
+                  "hpEach": 299914,
+                  "hpGroup": 599828
+                },
+                {
+                  "id": "22001",
+                  "name": "Miasmic Trooper: Shieldguard",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 2,
+                  "hpMult": 175,
+                  "baseHP": 1628,
+                  "hpEach": 299914,
+                  "hpGroup": 599828
+                }
+              ]
+            },
+            {
+              "ordinal": 4,
+              "enemies": [
+                {
+                  "id": "10131",
+                  "name": "Tarasque Mixer",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 1,
+                  "hpMult": 175,
+                  "baseHP": 8835,
+                  "hpEach": 1627606,
+                  "hpGroup": 1627606
+                },
+                {
+                  "id": "22000",
+                  "name": "Miasmic Trooper: Cannoneer",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 2,
+                  "hpMult": 175,
+                  "baseHP": 1628,
+                  "hpEach": 299914,
+                  "hpGroup": 599828
                 }
               ]
             }
@@ -412,78 +446,33 @@
           "ordinal": 1,
           "sideHPMult": 175,
           "elementMultipliers": {
-            "ice": 1,
-            "fire": 0.8,
+            "ice": 0.8,
+            "fire": 1,
             "electric": 1,
-            "ether": 1.2,
-            "physical": 0.8,
+            "ether": 0.8,
+            "physical": 1,
             "wind": 1
           },
           "elements": {
-            "ice": "neutral",
-            "fire": "weak",
+            "ice": "weak",
+            "fire": "neutral",
             "electric": "neutral",
-            "ether": "resist",
-            "physical": "weak",
+            "ether": "weak",
+            "physical": "neutral",
             "wind": "neutral"
           },
           "weaknesses": [
-            "fire",
-            "physical"
-          ],
-          "resistances": [
+            "ice",
             "ether"
           ],
+          "resistances": [],
           "waves": [
             {
               "ordinal": 1,
               "enemies": [
                 {
-                  "id": "10037",
-                  "name": "Strike Jaeger",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 3,
-                  "hpMult": 175,
-                  "baseHP": 1615,
-                  "hpEach": 442789,
-                  "hpGroup": 1328367
-                }
-              ]
-            },
-            {
-              "ordinal": 2,
-              "enemies": [
-                {
-                  "id": "10120",
-                  "name": "Heavy Striker",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 1,
-                  "hpMult": 175,
-                  "baseHP": 8414,
-                  "hpEach": 2306887,
-                  "hpGroup": 2306887
-                }
-              ]
-            },
-            {
-              "ordinal": 3,
-              "enemies": [
-                {
-                  "id": "10037",
-                  "name": "Strike Jaeger",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 2,
-                  "hpMult": 175,
-                  "baseHP": 1615,
-                  "hpEach": 442789,
-                  "hpGroup": 885578
-                },
-                {
-                  "id": "10022",
-                  "name": "Light Jaeger",
+                  "id": "10002",
+                  "name": "Alpeca",
                   "type": 1,
                   "typeName": "elite",
                   "count": 2,
@@ -491,22 +480,71 @@
                   "baseHP": 1373,
                   "hpEach": 376439,
                   "hpGroup": 752878
+                },
+                {
+                  "id": "10017",
+                  "name": "Hoplitai",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 2,
+                  "hpMult": 175,
+                  "baseHP": 1373,
+                  "hpEach": 376439,
+                  "hpGroup": 752878
+                },
+                {
+                  "id": "10024",
+                  "name": "Mandrake",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 1,
+                  "hpMult": 175,
+                  "baseHP": 1153,
+                  "hpEach": 316121,
+                  "hpGroup": 316121
                 }
               ]
             },
             {
-              "ordinal": 4,
+              "ordinal": 2,
               "enemies": [
                 {
-                  "id": "10115",
-                  "name": "Guardian",
-                  "type": 0,
-                  "typeName": "normal",
+                  "id": "10117",
+                  "name": "Hati",
+                  "type": 1,
+                  "typeName": "elite",
                   "count": 1,
                   "hpMult": 175,
-                  "baseHP": 8417,
-                  "hpEach": 2307710,
-                  "hpGroup": 2307710
+                  "baseHP": 6059,
+                  "hpEach": 1661211,
+                  "hpGroup": 1661211
+                }
+              ]
+            },
+            {
+              "ordinal": 3,
+              "enemies": [
+                {
+                  "id": "10127",
+                  "name": "Metro Goblin",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 1,
+                  "hpMult": 175,
+                  "baseHP": 7351,
+                  "hpEach": 2015442,
+                  "hpGroup": 2015442
+                },
+                {
+                  "id": "10038",
+                  "name": "Tyrfing",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 3,
+                  "hpMult": 175,
+                  "baseHP": 1373,
+                  "hpEach": 376439,
+                  "hpGroup": 1129317
                 }
               ]
             }
@@ -516,40 +554,53 @@
           "ordinal": 2,
           "sideHPMult": 175,
           "elementMultipliers": {
-            "ice": 0.8,
-            "fire": 1,
-            "electric": 1,
+            "ice": 1,
+            "fire": 1.2,
+            "electric": 0.8,
             "ether": 1,
-            "physical": 0.8,
+            "physical": 1.2,
             "wind": 1
           },
           "elements": {
-            "ice": "weak",
-            "fire": "neutral",
-            "electric": "neutral",
+            "ice": "neutral",
+            "fire": "resist",
+            "electric": "weak",
             "ether": "neutral",
-            "physical": "weak",
+            "physical": "resist",
             "wind": "neutral"
           },
           "weaknesses": [
-            "ice",
+            "electric"
+          ],
+          "resistances": [
+            "fire",
             "physical"
           ],
-          "resistances": [],
           "waves": [
             {
               "ordinal": 1,
               "enemies": [
                 {
-                  "id": "10031",
-                  "name": "Raider",
+                  "id": "10026",
+                  "name": "Patrol Jaeger",
                   "type": 1,
                   "typeName": "elite",
-                  "count": 3,
+                  "count": 2,
                   "hpMult": 175,
-                  "baseHP": 1615,
-                  "hpEach": 442789,
-                  "hpGroup": 1328367
+                  "baseHP": 1373,
+                  "hpEach": 376439,
+                  "hpGroup": 752878
+                },
+                {
+                  "id": "10034",
+                  "name": "Scout Jaeger",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 2,
+                  "hpMult": 175,
+                  "baseHP": 1373,
+                  "hpEach": 376439,
+                  "hpGroup": 752878
                 }
               ]
             },
@@ -557,15 +608,15 @@
               "ordinal": 2,
               "enemies": [
                 {
-                  "id": "10106",
-                  "name": "Bulky Intimidator",
+                  "id": "10109",
+                  "name": "Enraged Sweeper",
                   "type": 0,
                   "typeName": "normal",
                   "count": 1,
                   "hpMult": 175,
-                  "baseHP": 6324,
-                  "hpEach": 1733867,
-                  "hpGroup": 1733867
+                  "baseHP": 6759,
+                  "hpEach": 1853132,
+                  "hpGroup": 1853132
                 }
               ]
             },
@@ -573,8 +624,8 @@
               "ordinal": 3,
               "enemies": [
                 {
-                  "id": "10031",
-                  "name": "Raider",
+                  "id": "10016",
+                  "name": "Harrier Jaeger",
                   "type": 1,
                   "typeName": "elite",
                   "count": 2,
@@ -584,8 +635,8 @@
                   "hpGroup": 885578
                 },
                 {
-                  "id": "10028",
-                  "name": "Poacher",
+                  "id": "10034",
+                  "name": "Scout Jaeger",
                   "type": 1,
                   "typeName": "elite",
                   "count": 2,
@@ -600,15 +651,26 @@
               "ordinal": 4,
               "enemies": [
                 {
-                  "id": "10105",
-                  "name": "Bulky Enforcer",
-                  "type": 0,
-                  "typeName": "normal",
+                  "id": "10116",
+                  "name": "Guardian MK II",
+                  "type": 1,
+                  "typeName": "elite",
                   "count": 1,
                   "hpMult": 175,
-                  "baseHP": 8414,
-                  "hpEach": 2306887,
-                  "hpGroup": 2306887
+                  "baseHP": 8736,
+                  "hpEach": 2395171,
+                  "hpGroup": 2395171
+                },
+                {
+                  "id": "10026",
+                  "name": "Patrol Jaeger",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 2,
+                  "hpMult": 175,
+                  "baseHP": 1373,
+                  "hpEach": 376439,
+                  "hpGroup": 752878
                 }
               ]
             }
@@ -621,105 +683,6 @@
       "sides": [
         {
           "ordinal": 1,
-          "sideHPMult": 350,
-          "elementMultipliers": {
-            "ice": 1.2,
-            "fire": 0.8,
-            "electric": 1,
-            "ether": 1,
-            "physical": 0.8,
-            "wind": 1
-          },
-          "elements": {
-            "ice": "resist",
-            "fire": "weak",
-            "electric": "neutral",
-            "ether": "neutral",
-            "physical": "weak",
-            "wind": "neutral"
-          },
-          "weaknesses": [
-            "fire",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "waves": [
-            {
-              "ordinal": 1,
-              "enemies": [
-                {
-                  "id": "10004",
-                  "name": "Ambusher",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 2,
-                  "hpMult": 350,
-                  "baseHP": 1373,
-                  "hpEach": 931738,
-                  "hpGroup": 1863476
-                },
-                {
-                  "id": "10033",
-                  "name": "Rustler",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 2,
-                  "hpMult": 350,
-                  "baseHP": 1373,
-                  "hpEach": 931738,
-                  "hpGroup": 1863476
-                }
-              ]
-            },
-            {
-              "ordinal": 2,
-              "enemies": [
-                {
-                  "id": "12105",
-                  "name": "Doppelganger: Pulchra",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 1,
-                  "hpMult": 350,
-                  "baseHP": 10220,
-                  "hpEach": 6935445,
-                  "hpGroup": 6935445
-                }
-              ]
-            },
-            {
-              "ordinal": 3,
-              "enemies": [
-                {
-                  "id": "12101",
-                  "name": "Doppelganger: Bellum",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 1,
-                  "hpMult": 350,
-                  "baseHP": 10945,
-                  "hpEach": 7427441,
-                  "hpGroup": 7427441
-                },
-                {
-                  "id": "12103",
-                  "name": "Doppelganger: Mors",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 1,
-                  "hpMult": 350,
-                  "baseHP": 10220,
-                  "hpEach": 6935445,
-                  "hpGroup": 6935445
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "ordinal": 2,
           "sideHPMult": 350,
           "elementMultipliers": {
             "ice": 0.8,
@@ -814,6 +777,104 @@
               ]
             }
           ]
+        },
+        {
+          "ordinal": 2,
+          "sideHPMult": 350,
+          "elementMultipliers": {
+            "ice": 1,
+            "fire": 1.2,
+            "electric": 0.8,
+            "ether": 1,
+            "physical": 1,
+            "wind": 1
+          },
+          "elements": {
+            "ice": "neutral",
+            "fire": "resist",
+            "electric": "weak",
+            "ether": "neutral",
+            "physical": "neutral",
+            "wind": "neutral"
+          },
+          "weaknesses": [
+            "electric"
+          ],
+          "resistances": [
+            "fire"
+          ],
+          "waves": [
+            {
+              "ordinal": 1,
+              "enemies": [
+                {
+                  "id": "22000",
+                  "name": "Miasmic Trooper: Cannoneer",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 2,
+                  "hpMult": 350,
+                  "baseHP": 1628,
+                  "hpEach": 1104785,
+                  "hpGroup": 2209570
+                },
+                {
+                  "id": "22001",
+                  "name": "Miasmic Trooper: Shieldguard",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 2,
+                  "hpMult": 350,
+                  "baseHP": 1628,
+                  "hpEach": 1104785,
+                  "hpGroup": 2209570
+                }
+              ]
+            },
+            {
+              "ordinal": 2,
+              "enemies": [
+                {
+                  "id": "10126",
+                  "name": "Lightfoot Rover MK II",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 1,
+                  "hpMult": 350,
+                  "baseHP": 7351,
+                  "hpEach": 4988499,
+                  "hpGroup": 4988499
+                }
+              ]
+            },
+            {
+              "ordinal": 3,
+              "enemies": [
+                {
+                  "id": "10121",
+                  "name": "Heavy Striker MK II",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 1,
+                  "hpMult": 350,
+                  "baseHP": 9088,
+                  "hpEach": 6167253,
+                  "hpGroup": 6167253
+                },
+                {
+                  "id": "10104",
+                  "name": "Assault Gunner",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 1,
+                  "hpMult": 350,
+                  "baseHP": 6640,
+                  "hpEach": 4506004,
+                  "hpGroup": 4506004
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -823,129 +884,6 @@
         {
           "ordinal": 1,
           "sideHPMult": 350,
-          "elementMultipliers": {
-            "ice": 1.2,
-            "fire": 0.8,
-            "electric": 1,
-            "ether": 1,
-            "physical": 0.8,
-            "wind": 1
-          },
-          "elements": {
-            "ice": "resist",
-            "fire": "weak",
-            "electric": "neutral",
-            "ether": "neutral",
-            "physical": "weak",
-            "wind": "neutral"
-          },
-          "weaknesses": [
-            "fire",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "waves": [
-            {
-              "ordinal": 1,
-              "enemies": [
-                {
-                  "id": "10134",
-                  "name": "Wanted Enforcer",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 1,
-                  "hpMult": 350,
-                  "baseHP": 8655,
-                  "hpEach": 6493803,
-                  "hpGroup": 6493803
-                },
-                {
-                  "id": "10135",
-                  "name": "Wanted Intimidator",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 1,
-                  "hpMult": 350,
-                  "baseHP": 6517,
-                  "hpEach": 4889673,
-                  "hpGroup": 4889673
-                }
-              ]
-            },
-            {
-              "ordinal": 2,
-              "enemies": [
-                {
-                  "id": "10216",
-                  "name": "Troublemaker: Wanted Enforcer",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 1,
-                  "hpMult": 350,
-                  "baseHP": 20548,
-                  "hpEach": 15417062,
-                  "hpGroup": 15417062
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "ordinal": 2,
-          "sideHPMult": 250,
-          "elementMultipliers": {
-            "ice": 0.8,
-            "fire": 0.8,
-            "electric": 1.2,
-            "ether": 1,
-            "physical": 1,
-            "wind": 1
-          },
-          "elements": {
-            "ice": "weak",
-            "fire": "weak",
-            "electric": "resist",
-            "ether": "neutral",
-            "physical": "neutral",
-            "wind": "neutral"
-          },
-          "weaknesses": [
-            "ice",
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "waves": [
-            {
-              "ordinal": 1,
-              "enemies": [
-                {
-                  "id": "23200",
-                  "name": "Haytor",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 1,
-                  "hpMult": 250,
-                  "baseHP": 30200,
-                  "hpEach": 16184935,
-                  "hpGroup": 16184935
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ordinal": 5,
-      "sides": [
-        {
-          "ordinal": 1,
-          "roomBuffId": "62000075",
-          "sideHPMult": 440,
           "elementMultipliers": {
             "ice": 0.8,
             "fire": 1,
@@ -972,15 +910,15 @@
               "ordinal": 1,
               "enemies": [
                 {
-                  "id": "10014",
-                  "name": "Greedy Ranger",
+                  "id": "10117",
+                  "name": "Hati",
                   "type": 1,
                   "typeName": "elite",
-                  "count": 3,
-                  "hpMult": 220,
-                  "baseHP": 1373,
-                  "hpEach": 748958,
-                  "hpGroup": 2246874
+                  "count": 2,
+                  "hpMult": 350,
+                  "baseHP": 6059,
+                  "hpEach": 4546037,
+                  "hpGroup": 9092074
                 }
               ]
             },
@@ -988,42 +926,15 @@
               "ordinal": 2,
               "enemies": [
                 {
-                  "id": "24100",
-                  "name": "Ionized: Pugnus",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 1,
-                  "hpMult": 230,
-                  "baseHP": 13541,
-                  "hpEach": 7722229,
-                  "hpGroup": 7722229
-                },
-                {
-                  "id": "10040",
-                  "name": "Vicious Striker",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 2,
-                  "hpMult": 220,
-                  "baseHP": 1373,
-                  "hpEach": 748958,
-                  "hpGroup": 1497916
-                }
-              ]
-            },
-            {
-              "ordinal": 3,
-              "enemies": [
-                {
-                  "id": "17200",
-                  "name": "Tepes",
+                  "id": "10212",
+                  "name": "Notorious: Armored Hati",
                   "type": 0,
                   "typeName": "normal",
                   "count": 1,
-                  "hpMult": 440,
-                  "baseHP": 21297,
-                  "hpEach": 23234601,
-                  "hpGroup": 23234601
+                  "hpMult": 350,
+                  "baseHP": 15411,
+                  "hpEach": 11562796,
+                  "hpGroup": 11562796
                 }
               ]
             }
@@ -1031,57 +942,43 @@
         },
         {
           "ordinal": 2,
-          "roomBuffId": "62000070",
-          "sideHPMult": 480,
+          "sideHPMult": 250,
           "elementMultipliers": {
-            "ice": 0.8,
+            "ice": 1.2,
             "fire": 1,
-            "electric": 1,
-            "ether": 1.2,
-            "physical": 1.2,
-            "wind": 0.8
+            "electric": 0.8,
+            "ether": 1,
+            "physical": 1,
+            "wind": 1
           },
           "elements": {
-            "ice": "weak",
+            "ice": "resist",
             "fire": "neutral",
-            "electric": "neutral",
-            "ether": "resist",
-            "physical": "resist",
-            "wind": "weak"
+            "electric": "weak",
+            "ether": "neutral",
+            "physical": "neutral",
+            "wind": "neutral"
           },
           "weaknesses": [
-            "ice",
-            "wind"
+            "electric"
           ],
           "resistances": [
-            "ether",
-            "physical"
+            "ice"
           ],
           "waves": [
             {
               "ordinal": 1,
               "enemies": [
                 {
-                  "id": "23102",
-                  "name": "Miasmic: Trinox",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 1,
-                  "hpMult": 230,
-                  "baseHP": 13839,
-                  "hpEach": 7892174,
-                  "hpGroup": 7892174
-                },
-                {
-                  "id": "23101",
-                  "name": "Miasmic: Frenzied Maniac",
-                  "type": 0,
-                  "typeName": "normal",
-                  "count": 1,
-                  "hpMult": 230,
-                  "baseHP": 9581,
-                  "hpEach": 5463901,
-                  "hpGroup": 5463901
+                  "id": "22001",
+                  "name": "Miasmic Trooper: Shieldguard",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 3,
+                  "hpMult": 210,
+                  "baseHP": 1991,
+                  "hpEach": 896302,
+                  "hpGroup": 2688906
                 }
               ]
             },
@@ -1089,24 +986,29 @@
               "ordinal": 2,
               "enemies": [
                 {
-                  "id": "30200",
-                  "name": "Airspace Sentinel",
+                  "id": "15200",
+                  "name": "Lumberjack",
                   "type": 0,
                   "typeName": "normal",
                   "count": 1,
-                  "hpMult": 480,
-                  "baseHP": 42528,
-                  "hpEach": 50615124,
-                  "hpGroup": 50615124
+                  "hpMult": 250,
+                  "baseHP": 20134,
+                  "hpEach": 10790314,
+                  "hpGroup": 10790314
                 }
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "ordinal": 5,
+      "sides": [
         {
-          "ordinal": 3,
-          "roomBuffId": "62000076",
-          "sideHPMult": 680,
+          "ordinal": 1,
+          "roomBuffId": "62000077",
+          "sideHPMult": 580,
           "elementMultipliers": {
             "ice": 1,
             "fire": 1.2,
@@ -1136,37 +1038,26 @@
               "ordinal": 1,
               "enemies": [
                 {
-                  "id": "10126",
-                  "name": "Lightfoot Rover MK II",
+                  "id": "10116",
+                  "name": "Guardian MK II",
                   "type": 1,
                   "typeName": "elite",
                   "count": 1,
-                  "hpMult": 270,
-                  "baseHP": 7351,
-                  "hpEach": 4921237,
-                  "hpGroup": 4921237
+                  "hpMult": 250,
+                  "baseHP": 8736,
+                  "hpEach": 5415228,
+                  "hpGroup": 5415228
                 },
                 {
-                  "id": "22000",
-                  "name": "Miasmic Trooper: Cannoneer",
+                  "id": "10104",
+                  "name": "Assault Gunner",
                   "type": 1,
                   "typeName": "elite",
-                  "count": 2,
-                  "hpMult": 240,
-                  "baseHP": 1991,
-                  "hpEach": 1184804,
-                  "hpGroup": 2369608
-                },
-                {
-                  "id": "22001",
-                  "name": "Miasmic Trooper: Shieldguard",
-                  "type": 1,
-                  "typeName": "elite",
-                  "count": 3,
-                  "hpMult": 240,
-                  "baseHP": 1991,
-                  "hpEach": 1184804,
-                  "hpGroup": 3554412
+                  "count": 1,
+                  "hpMult": 250,
+                  "baseHP": 6843,
+                  "hpEach": 4241805,
+                  "hpGroup": 4241805
                 }
               ]
             },
@@ -1179,10 +1070,172 @@
                   "type": 0,
                   "typeName": "normal",
                   "count": 1,
-                  "hpMult": 680,
+                  "hpMult": 580,
                   "baseHP": 26845,
-                  "hpEach": 45262281,
-                  "hpGroup": 45262281
+                  "hpEach": 38606063,
+                  "hpGroup": 38606063
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ordinal": 2,
+          "roomBuffId": "62000078",
+          "sideHPMult": 530,
+          "elementMultipliers": {
+            "ice": 0.8,
+            "fire": 1,
+            "electric": 1.2,
+            "ether": 1,
+            "physical": 0.8,
+            "wind": 1
+          },
+          "elements": {
+            "ice": "weak",
+            "fire": "neutral",
+            "electric": "resist",
+            "ether": "neutral",
+            "physical": "weak",
+            "wind": "neutral"
+          },
+          "weaknesses": [
+            "ice",
+            "physical"
+          ],
+          "resistances": [
+            "electric"
+          ],
+          "waves": [
+            {
+              "ordinal": 1,
+              "enemies": [
+                {
+                  "id": "10014",
+                  "name": "Greedy Ranger",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 3,
+                  "hpMult": 230,
+                  "baseHP": 1373,
+                  "hpEach": 783001,
+                  "hpGroup": 2349003
+                }
+              ]
+            },
+            {
+              "ordinal": 2,
+              "enemies": [
+                {
+                  "id": "24100",
+                  "name": "Ionized: Pugnus",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 1,
+                  "hpMult": 230,
+                  "baseHP": 13541,
+                  "hpEach": 7722229,
+                  "hpGroup": 7722229
+                },
+                {
+                  "id": "10040",
+                  "name": "Vicious Striker",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 2,
+                  "hpMult": 230,
+                  "baseHP": 1373,
+                  "hpEach": 783001,
+                  "hpGroup": 1566002
+                }
+              ]
+            },
+            {
+              "ordinal": 3,
+              "enemies": [
+                {
+                  "id": "28200",
+                  "name": "The Decider: Terror Raptor",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 1,
+                  "hpMult": 530,
+                  "baseHP": 33148,
+                  "hpEach": 43560947,
+                  "hpGroup": 43560947
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ordinal": 3,
+          "roomBuffId": "62000079",
+          "sideHPMult": 630,
+          "elementMultipliers": {
+            "ice": 1,
+            "fire": 1.2,
+            "electric": 1,
+            "ether": 0.8,
+            "physical": 0.8,
+            "wind": 1
+          },
+          "elements": {
+            "ice": "neutral",
+            "fire": "resist",
+            "electric": "neutral",
+            "ether": "weak",
+            "physical": "weak",
+            "wind": "neutral"
+          },
+          "weaknesses": [
+            "ether",
+            "physical"
+          ],
+          "resistances": [
+            "fire"
+          ],
+          "waves": [
+            {
+              "ordinal": 1,
+              "enemies": [
+                {
+                  "id": "24100",
+                  "name": "Ionized: Pugnus",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 1,
+                  "hpMult": 270,
+                  "baseHP": 13541,
+                  "hpEach": 9065226,
+                  "hpGroup": 9065226
+                },
+                {
+                  "id": "10100",
+                  "name": "Arlaune",
+                  "type": 1,
+                  "typeName": "elite",
+                  "count": 1,
+                  "hpMult": 270,
+                  "baseHP": 5062,
+                  "hpEach": 3388832,
+                  "hpGroup": 3388832
+                }
+              ]
+            },
+            {
+              "ordinal": 2,
+              "enemies": [
+                {
+                  "id": "26200",
+                  "name": "Mirage Archer Unit",
+                  "type": 0,
+                  "typeName": "normal",
+                  "count": 1,
+                  "hpMult": 630,
+                  "baseHP": 33220,
+                  "hpEach": 51892464,
+                  "hpGroup": 51892464
                 }
               ]
             }
@@ -1204,7 +1257,7 @@
   },
   "provenance": {
     "repository": "https://github.com/spiritfxxxx/buhflipexplode",
-    "sha": "5b6fbdfb665e07ccb44aee16c6a556bd4f36dc1b",
+    "sha": "887e2b3a2500f6ef5b2e2cbb9f8895d46ed1476a",
     "paths": [
       "zzz/sd/sd-versions.json",
       "assets/zzz/enemies.json",
@@ -1212,10 +1265,10 @@
       "zzz/sd/sd.js",
       "LICENSE"
     ],
-    "fetchedDate": "2026-09-04",
+    "fetchedDate": "2026-09-18",
     "license": "GPL-3.0",
-    "liveOrdinal": 56,
-    "liveId": "3.1.3",
+    "liveOrdinal": 57,
+    "liveId": "3.2.1",
     "calculatedHPLabel": "hpEach and hpGroup are calculated values; hpGroup = hpEach * count."
   }
 }
